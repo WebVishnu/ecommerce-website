@@ -32,7 +32,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
   return (
     <div
-      className="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out relative font-[family-name:var(--font-montserrat-regular)] w-56"
+      className="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out relative w-full sm:w-52 lg:w-56"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -43,19 +43,19 @@ const ProductCard = ({ product }: { product: Product }) => {
           alt={product.name}
           width={500}
           height={500}
-          className="w-full h-44 object-cover" // Slightly larger height for image
+          className="w-full h-32 sm:h-40 lg:h-48 object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
         />
 
         {/* Product Badge */}
         {product.badge && (
-          <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded font-[family-name:var(--font-montserrat-bold)]">
+          <span className="absolute top-2 left-2 bg-green-500 text-white text-xs lg:text-sm font-bold px-2 py-1 rounded">
             {product.badge}
           </span>
         )}
 
         {/* Sale Badge */}
         {product.sale && (
-          <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded font-[family-name:var(--font-montserrat-bold)]">
+          <span className="absolute top-2 right-2 bg-red-500 text-white text-xs lg:text-sm font-bold px-2 py-1 rounded">
             {product.discount}% OFF
           </span>
         )}
@@ -64,20 +64,20 @@ const ProductCard = ({ product }: { product: Product }) => {
       {/* Product Details */}
       <div className="p-4 flex flex-col justify-between h-full">
         <div>
-          <h3 className="text-sm font-bold text-gray-900 font-[family-name:var(--font-montserrat-bold)] truncate">
+          <h3 className="text-sm lg:text-base font-bold text-gray-900 truncate">
             {product.brand}
           </h3>
-          <p className="text-xs text-gray-500 mb-3 truncate font-[family-name:var(--font-montserrat-regular)]">
+          <p className="text-xs lg:text-sm text-gray-500 mb-2 truncate">
             {product.name}
           </p>
 
           <div className="flex items-center justify-between mb-2">
             {product.oldPrice && (
-              <span className="text-xs line-through text-gray-400">
+              <span className="text-xs lg:text-sm line-through text-gray-400">
                 ₹{product.oldPrice}
               </span>
             )}
-            <span className="text-lg font-semibold text-red-600 font-[family-name:var(--font-montserrat-bold)]">
+            <span className="text-lg lg:text-xl font-semibold text-red-600">
               ₹{product.price}
             </span>
           </div>
@@ -87,25 +87,25 @@ const ProductCard = ({ product }: { product: Product }) => {
       {/* Add to Cart and Quantity Adjustment */}
       {quantity === 0 ? (
         <button
-          className={`absolute bottom-0 left-0 w-full py-3 bg-my-blue text-white text-xs font-bold rounded-none transition-transform transform ${
+          className={`absolute bottom-0 left-0 w-full py-3 bg-my-blue text-white text-xs lg:text-sm font-bold transition-transform transform ${
             isHovered ? "translate-y-0" : "translate-y-full"
-          } duration-300 ease-in-out font-[family-name:var(--font-montserrat-bold)]`}
+          } duration-300 ease-in-out`}
           onClick={addToCart}
         >
           Add to Cart
         </button>
       ) : (
-        <div className="absolute bottom-0 left-0 w-full  bg-my-blue text-white text-xs font-bold rounded-none flex justify-center items-center space-x-4 py-2">
+        <div className="absolute bottom-0 left-0 w-full bg-my-blue text-white text-xs lg:text-sm font-bold flex justify-center items-center space-x-4 py-2">
           <button
             onClick={decreaseQuantity}
-            className="text-white px-3 py-1    transition duration-200 ease-in-out"
+            className="text-white px-3 py-1 transition duration-200 ease-in-out"
           >
             -
           </button>
           <span className="text-sm font-bold">{quantity}</span>
           <button
             onClick={increaseQuantity}
-            className="text-white px-3 py-1    transition duration-200 ease-in-out"
+            className="text-white px-3 py-1 transition duration-200 ease-in-out"
           >
             +
           </button>
@@ -144,7 +144,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         />
         <label
           htmlFor="compare"
-          className="ml-2 text-xs text-gray-600 font-[family-name:var(--font-montserrat-regular)]"
+          className="ml-2 text-xs lg:text-sm text-gray-600"
         >
           Compare
         </label>
