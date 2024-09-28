@@ -215,6 +215,7 @@ export default function Product() {
   // State to show only first 10 products initially
   const [visibleProducts, setVisibleProducts] = useState(12);
 
+  console.log(setVisibleProducts)
   // Handle see more click
   const handleSeeMoreClick = () => {
     router.push("/products"); // Navigate to /products page

@@ -11,6 +11,7 @@ export default function PhoneLoginPage() {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading spinner state
 
+  console.log(otp)
   const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true); // Start spinner when sending OTP
