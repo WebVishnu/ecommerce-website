@@ -6,6 +6,7 @@ import Hero from "@/components/screens/Hero";
 import Footer from "@/components/Footer";
 import VideoPlayer from "@/components/screens/Video";
 import PromoBanner from "@/components/PromoCode";
+import CategorySlider from "@/components/Category";
 
 export default function Page() {
   return (
@@ -20,6 +21,7 @@ export default function Page() {
       <VideoPlayer />
 
 <PromoBanner />
+<CategorySlider />
       {/* Product Section */}
       <div className="px-4">
         <Product />
