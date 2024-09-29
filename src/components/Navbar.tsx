@@ -4,11 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  FiChevronDown,
   FiMenu,
   FiX,
   FiHeart,
-  FiGift,
   FiUser,
   FiShoppingCart,
   FiSearch,
@@ -18,7 +16,6 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<string | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
