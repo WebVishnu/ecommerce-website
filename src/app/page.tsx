@@ -3,6 +3,9 @@
 import Navbar from "@/components/Navbar";
 import Product from "@/components/screens/Product";
 import Hero from "@/components/screens/Hero";
+import Footer from "@/components/Footer";
+import VideoPlayer from "@/components/screens/Video";
+import PromoBanner from "@/components/PromoCode";
 
 export default function Page() {
   return (
@@ -10,15 +13,19 @@ export default function Page() {
       {/* Navbar Component */}
       <Navbar />
 
-      {/* Add padding to the top to account for the fixed navbar */}
-      <div className="pt-20">
+      <div className="pt-20"> 
         <Hero />
       </div>
 
+      <VideoPlayer />
+
+<PromoBanner />
       {/* Product Section */}
       <div className="px-4">
         <Product />
       </div>
+      
+      <Footer />
     </div>
   );
 }

@@ -223,7 +223,7 @@ export default function Product() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center font-[family-name:var(--font-montserrat-bold)]">
+      <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-8 text-center font-[family-name:var(--font-montserrat-bold)]">
         Featured Products
       </h1>
 
