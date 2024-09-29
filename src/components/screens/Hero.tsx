@@ -20,7 +20,7 @@ function Hero() {
       >
         {/* Slide 1 */}
         <SwiperSlide>
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full pt-10 md:pt-20">
             <Image
               src="/main.jpg"
               alt="Main Image 1"

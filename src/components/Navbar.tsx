@@ -86,11 +86,11 @@ const Navbar = () => {
               <div className="flex flex-row  gap-x-4 md:gap-x-6">
                 <div className="lg:hidden flex items-center ">
                   <button onClick={() => setMenuOpen(!menuOpen)}>
-                    {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+                    {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                   </button>
                 </div>
                 <button onClick={handleSearch} className=" text-my-blue">
-                  <FiSearch size={28} />
+                  <FiSearch size={24} />
                 </button>
               </div>
               <Image
@@ -103,13 +103,13 @@ const Navbar = () => {
 
               <div className="flex flex-row  gap-x-4 md:gap-x-6">
                 <div className=" text-my-blue text-sm">
-                  <FiUser size={28} />
+                  <FiUser size={24} />
                 </div>
                 <Link
                   href="/cart"
                   className="flex flex-col items-center relative"
                 >
-                  <FiShoppingCart size={28} />
+                  <FiShoppingCart size={24} />
                   <div className="absolute -top-3 -right-2 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     0
                   </div>
