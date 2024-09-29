@@ -8,7 +8,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 function Hero() {
   return (
-    <div className="relative w-full h-[30vh] pt-10 md:pt-20 md:h-[70vh] lg:h-[90vh]"> {/* Responsive height based on screen size */}
+    <div className="relative w-full h-[30vh] pt-10  md:h-[70vh] lg:h-[90vh]"> {/* Responsive height based on screen size */}
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}
