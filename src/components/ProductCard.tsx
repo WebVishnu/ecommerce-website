@@ -4,19 +4,8 @@ import { FiHeart } from 'react-icons/fi';
 import QuickViewModal from './Modal/QuickViewModal';
 import { FaEye } from 'react-icons/fa';
 import QuickAddModal from './Modal/QuickAddModal';
+import { Product } from '@/types';
 
-interface Product {
-  images: string[]; // Array of images
-  name: string;
-  originalPrice: number;
-  salePrice: number;
-  onSale: boolean;
-  stock?: number;
-  vendor?: string;
-  availability?: string;
-  type?: string;
-  customersViewing?: number;
-}
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const { images, name, originalPrice, salePrice, onSale } = product;

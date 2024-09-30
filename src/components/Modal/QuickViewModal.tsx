@@ -1,10 +1,11 @@
+import { Product } from '@/types';
 import React, { useState, useEffect } from 'react';
 import { FiHeart, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface QuickViewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  product: any;
+  product: Product;
 }
 
 const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, product }) => {

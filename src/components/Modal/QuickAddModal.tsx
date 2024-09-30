@@ -1,10 +1,11 @@
+import { Product } from '@/types';
 import React, { useState } from 'react';
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface QuickAddModalProps {
   isOpen: boolean;
   onClose: () => void;
-  product: any;
+  product: Product;
 }
 
 const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product }) => {
@@ -65,7 +66,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product 
 
             {/* Image Indicator Dots */}
             <div className="flex justify-center mt-4 space-x-2">
-              {product.images.map((_: any, index: number) => (
+              {product.images.map((_, index) => (
                 <span
                   key={index}
                   className={`w-2 h-2 rounded-full cursor-pointer ${
