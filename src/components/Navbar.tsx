@@ -100,7 +100,7 @@ const Navbar = () => {
                 alt="Logo"
                 width={1000}
                 height={1000}
-                className="w-[40%] h-20 object-contain"
+                className="w-[40%] h-14 object-contain"
               />
 
               <div className="flex flex-row gap-x-4 md:gap-x-6">
