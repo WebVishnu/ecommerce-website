@@ -10,6 +10,8 @@ import {
   FiUser,
   FiShoppingCart,
   FiSearch,
+  FiHome,
+  FiGrid,
 } from "react-icons/fi"; // Import additional icons
 import { useRouter } from "next/navigation";
 
@@ -53,7 +55,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full fixed top-0 left-0 z-50 ">
+    <header className="w-full fixed top-0 left-0 z-50">
       <div
         className={`transition-all duration-500 ease-in-out ${
           isScrolled && scrollDirection === "down"
@@ -83,13 +85,13 @@ const Navbar = () => {
         <div className="bg-white py-3">
           <div className="container mx-auto flex justify-between items-center px-4">
             <div className=" lg:hidden flex items-center space-x-4 w-full justify-between">
-              <div className="flex flex-row  gap-x-4 md:gap-x-6">
+              <div className="flex flex-row gap-x-4 md:gap-x-6">
                 <div className="lg:hidden flex items-center ">
                   <button onClick={() => setMenuOpen(!menuOpen)}>
                     {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                   </button>
                 </div>
-                <button onClick={handleSearch} className=" text-my-blue">
+                <button title="search" onClick={handleSearch} className="text-my-blue">
                   <FiSearch size={24} />
                 </button>
               </div>
@@ -101,8 +103,8 @@ const Navbar = () => {
                 className="w-[40%] h-20 object-contain"
               />
 
-              <div className="flex flex-row  gap-x-4 md:gap-x-6">
-                <div className=" text-my-blue text-sm">
+              <div className="flex flex-row gap-x-4 md:gap-x-6">
+                <div className="text-my-blue text-sm">
                   <FiUser size={24} />
                 </div>
                 <Link
@@ -117,7 +119,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="hidden lg:flex items-center space-x-4  w-[30%]">
+            <div className="hidden lg:flex items-center space-x-4 w-[30%]">
               <Image
                 src="/vitco.png"
                 alt="Logo"
@@ -143,6 +145,7 @@ const Navbar = () => {
                 className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
               />
               <button
+              title="Search"
                 onClick={handleSearch}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-my-blue"
               >
@@ -183,6 +186,7 @@ const Navbar = () => {
         }`}
       >
         <button
+        title="Close Menu"
           onClick={() => setMenuOpen(false)}
           className="absolute top-5 right-5 text-3xl"
         >
@@ -220,6 +224,39 @@ const Navbar = () => {
           </Link>
         </nav>
       </div>
+
+      {/* Bottom Navigation Bar */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white  shadow-lg z-50">
+        <div className="md:hidden flex justify-around items-center py-2">
+          <Link href="/" className="flex flex-col items-center">
+            <FiHome size={24} />
+            <span className="text-xs">Home</span>
+          </Link>
+
+          <Link href="/search" className="flex flex-col items-center">
+            <FiSearch size={24} />
+            <span className="text-xs">Search</span>
+          </Link>
+
+          <Link href="/collection" className="flex flex-col items-center">
+            <FiGrid size={24} />
+            <span className="text-xs">Collection</span>
+          </Link>
+
+          <Link href="/account" className="flex flex-col items-center">
+            <FiUser size={24} />
+            <span className="text-xs">Account</span>
+          </Link>
+
+          <Link href="/cart" className="flex flex-col items-center relative">
+            <FiShoppingCart size={24} />
+            <div className="absolute -top-2 -right-3 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              0
+            </div>
+            <span className="text-xs">Cart</span>
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 };
