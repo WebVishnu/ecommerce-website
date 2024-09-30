@@ -9,207 +9,101 @@ export default function Product() {
 
   const products = [
     {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
+      images: ['/products/p2.jpg', '/products/p3.jpg', '/products/p4.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
+      images: ['/products/p5.jpeg', '/products/p1.png', '/products/p2.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 5) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p5.jpeg", // Replace with actual image path
-      sale: true,
-      discount: 40,
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 6) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "BRAND X",
-      price: 99.0,
-      image: "/products/p4.jpg", // Replace with actual image path
+      images: ['/products/p5.jpeg', '/products/p1.png', '/products/p2.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
     {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
     },
-    {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
-    },
-    {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
-    },
-    {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
-    },
-    {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
-    },
-    {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
-    },
-    {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
-    },
-    {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
-    },
-    {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 1) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "SODLING",
-      price: 86.0,
-      image: "/products/p1.png", // Replace with actual image path
-      badge: "Bundle",
-    },
-    {
-      name: "(Product 2) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "TOMORROW",
-      price: 16.99,
-      oldPrice: 22.99,
-      image: "/products/p2.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    {
-      name: "(Product 3) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "PAUL SMITH",
-      price: 86.0,
-      image: "/products/p3.jpg", // Replace with actual image path
-    },
-    {
-      name: "(Product 4) Sample - Clothing And Accessory Boutiques For Sale",
-      brand: "MANGO",
-      price: 59.0,
-      oldPrice: 86.0,
-      image: "/products/p4.jpg", // Replace with actual image path
-      sale: true,
-      discount: 40,
-    },
-    // Add more products up to 20-30 here...
   ];
 
   // State to show only first 10 products initially
