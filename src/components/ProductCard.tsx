@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FiHeart } from 'react-icons/fi';
 import QuickViewModal from './Modal/QuickViewModal';
 import { FaEye } from 'react-icons/fa';
+import QuickAddModal from './Modal/QuickAddModal';
 
 interface Product {
   images: string[]; // Array of images
@@ -23,6 +24,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [isLiked, setIsLiked] = useState(false); // New state for heart button
   const [isImageHovered, setIsImageHovered] = useState(false); // Track if the image is being hovered
   const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal state
+  const [isModalOpen1, setIsModalOpen1] = useState(false); // Manage modal state
+
+  const handleQuickAddClick = () => {
+    setIsModalOpen1(true); // Open the modal
+  };
 
   const handleLikeButtonClick = () => {
     setIsLiked(!isLiked); // Toggle the like state
@@ -104,7 +110,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
       {/* Quick Add Button and Heart Button */}
       <div className="flex flex-row w-full mt-4 items-center justify-between">
-        <button className="w-[80%] bg-white text-my-blue font-medium hover:text-white py-2 rounded-full hover:bg-my-blue transition-colors duration-700 border-[1px] border-my-blue">
+        <button className="w-[80%] bg-white text-my-blue font-medium hover:text-white py-2 rounded-full hover:bg-my-blue transition-colors duration-700 border-[1px] border-my-blue"
+                  onClick={handleQuickAddClick}
+>
           Quick Add
         </button>
 
@@ -143,6 +151,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
       {/* Modal */}
       <QuickViewModal isOpen={isModalOpen} onClose={handleCloseModal} product={product} />
+      <QuickAddModal isOpen={isModalOpen1} onClose={() => setIsModalOpen1(false)} product={product} />
     </div>
   );
 };
