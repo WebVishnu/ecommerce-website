@@ -22,6 +22,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen1, setSearchOpen1] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([] as any[]); // State to store filtered products
 
   const router = useRouter();
@@ -261,21 +262,59 @@ const Navbar = () => {
 
             {/* Center Section: Search Bar */}
             <div className="relative w-[40%] hidden lg:flex items-center">
-              <input
-                type="text"
-                placeholder="Search the store"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
-              />
-              <button
+            <input
+              type="text"
+              placeholder="Search the store"
+              value={searchQuery}
+              onFocus={() => setSearchOpen1(true)} // Open search overlay on focus
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
+            />
+            <button
               title="Search"
-                onClick={handleSearch}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-my-blue"
-              >
-                <FiSearch size={20} />
-              </button>
+              onClick={() => setSearchOpen1(true)} // Trigger search overlay
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-my-blue"
+            >
+              <FiSearch size={20} />
+            </button>
+              {searchOpen1 && (
+              <div className="absolute top-full left-0 w-full bg-white shadow-lg border mt-2 p-4 z-40">
+                {/* Trending Section */}
+                <div className="mb-4">
+                  <h2 className="text-sm font-bold mb-2">TRENDING NOW</h2>
+                  <div className="flex gap-2 flex-wrap">
+                    <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+                      <FiSearch className="inline mr-2" />
+                      dempus
+                    </button>
+                    <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+                      <FiSearch className="inline mr-2" />
+                      sample
+                    </button>
+                    <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+                      <FiSearch className="inline mr-2" />
+                      magnus
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filtered Products Section */}
+                <div>
+                  <h2 className="text-sm font-bold mb-2">PRODUCTS</h2>
+                  <div className="overflow-x-scroll px-2">
+                    <div className="flex space-x-4" style={{ minWidth: "200%" }}>
+                      {filteredProducts.map((product, index) => (
+                        <div key={index} className="w-1/3">
+                          <ProductCard product={product} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             </div>
+
 
             {/* Right Section - Icons */}
             <div className="hidden lg:flex w-[15%] mr-4 justify-between items-center space-x-6 text-my-blue text-sm">
