@@ -131,6 +131,14 @@ html {
   animation: slide-in 0.5s ease-out;
 }
 
+.overflow-x-scroll {
+  white-space: nowrap;
+}
+.flex {
+  display: flex;
+}
+
+
 .no-scroll {
   overflow: hidden;
 }

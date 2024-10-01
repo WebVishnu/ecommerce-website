@@ -14,12 +14,15 @@ import {
   FiGrid,
 } from "react-icons/fi"; // Import additional icons
 import { useRouter } from "next/navigation";
+import ProductCard from "./ProductCard";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState([] as any[]); // State to store filtered products
 
   const router = useRouter();
 
@@ -54,6 +57,125 @@ const Navbar = () => {
     }
   };
 
+  const handleSignInClick = () => {
+    router.push("/sign-in");
+  };
+
+  const handleWishlistClick = () => {
+    router.push("/wishlists");
+  };
+
+
+  const products = [
+    {
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p2.jpg', '/products/p3.jpg', '/products/p4.jpg'], // Array of product images
+      name: 'Product - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p5.jpeg', '/products/p1.png', '/products/p2.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p5.jpeg', '/products/p1.png', '/products/p2.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: true,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+    {
+      images: ['/products/p1.png', '/products/p2.jpg', '/products/p3.jpg'], // Array of product images
+      name: 'Sample - Computers & Accessories',
+      originalPrice: 99.00,
+      salePrice: 49.00,
+      onSale: false,
+      stock: 5, // Number of items left
+      vendor: 'Ella - Halothemes',
+      availability: 'In Stock',
+      type: 'Electronics',
+      customersViewing: 283, // Example customer count
+    },
+  ];
+
+   // Effect to filter products when searchQuery changes
+   useEffect(() => {
+    if (searchQuery) {
+      const filtered = products.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products); // If no search, show all products
+    }
+  }, [searchQuery]);
   return (
     <header className="w-full fixed top-0 left-0 z-50">
       <div
@@ -91,7 +213,9 @@ const Navbar = () => {
                     {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                   </button>
                 </div>
-                <button title="search" onClick={handleSearch} className="text-my-blue">
+                <button title="search"             
+                onClick={() => setSearchOpen(true)}
+ className="text-my-blue">
                   <FiSearch size={24} />
                 </button>
               </div>
@@ -179,64 +303,171 @@ const Navbar = () => {
         </div>
       </div>
 
+{/* Dimmed Background Overlay */}
+{menuOpen && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"
+          onClick={() => setMenuOpen(false)} // Close menu when clicking outside
+        ></div>
+      )}
       {/* Full-Screen Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-white bg-opacity-90 z-50 flex flex-col justify-center items-center text-my-blue transform transition-transform duration-700 ease-in-out ${
-          menuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+        className={`fixed top-0 left-0 h-full bg-white z-50 transition-transform transform duration-500 ease-in-out ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{ width: "80%" }} // 80% width as required
       >
-        <button
-        title="Close Menu"
-          onClick={() => setMenuOpen(false)}
-          className="absolute top-5 right-5 text-3xl"
-        >
-          <FiX />
-        </button>
-        {/* Mobile Navigation items */}
-        <nav className="flex flex-col space-y-8 text-2xl">
-          <Link
-            href="/"
-            className="hover:underline"
-            onClick={() => setMenuOpen(false)}
-          >
-            Home
+        {/* Menu Header */}
+        <div className="flex items-center justify-between px-4 py-4 border-b">
+          <span className="text-xl font-bold">Menu</span>
+          <button onClick={() => setMenuOpen(false)} className="text-2xl">
+            <FiX />
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex flex-col text-base font-medium text-gray-800">
+          <Link href="/theme-demo" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
+            Theme Demo <span className="ml-2 bg-blue-100 text-blue-500 px-2 py-1 rounded text-xs">New</span>
           </Link>
-          <Link
-            href="/shop"
-            className="hover:underline"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/shop" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
             Shop
           </Link>
-          <Link
-            href="/product"
-            className="hover:underline"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/product" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
             Product
           </Link>
-          <Link
-            href="/blog"
-            className="hover:underline"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link href="/blog" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
             Blog
           </Link>
+          <Link href="/pages" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
+            Pages
+          </Link>
+          <Link href="/new-in" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
+            New In
+          </Link>
+          <Link href="/trend" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
+            Trend
+          </Link>
+          <Link href="/collections" className="py-3 px-4 border-b" onClick={() => setMenuOpen(false)}>
+            Collections
+          </Link>
+        
         </nav>
+
+        {/* User Links */}
+        <div className="py-4  flex flex-col">
+          <button
+            className="py-3 px-4 flex items-center space-x-2 border-b"
+            onClick={handleSignInClick}
+          >
+            <FiUser className="text-lg" />
+            <span>Sign In</span>
+          </button>
+          <button
+            className="py-3 px-4 flex items-center space-x-2 border-b"
+            onClick={() => router.push("/create-account")}
+          >
+            <FiUser className="text-lg" />
+            <span>Create an Account</span>
+          </button>
+          <button
+            className="py-3 px-4 flex items-center space-x-2 border-b"
+            onClick={handleWishlistClick}
+          >
+            <FiHeart className="text-lg" />
+            <span>My Wish List</span>
+          </button>
+        </div>
+
+    
       </div>
 
+      <div
+        className={`fixed top-0 left-0 h-full bg-white z-50 transition-transform transform duration-500 ease-in-out ${
+          searchOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        style={{ width: "80%" }} // 80% width as required
+      >
+        <div className="flex items-center justify-between px-4 py-4 border-b">
+          <span className="text-xl font-bold">Search</span>
+          <button
+            onClick={() => setSearchOpen(false)}
+            className="text-2xl text-gray-600"
+          >
+            <FiX />
+          </button>
+        </div>
+
+        {/* Search Input */}
+        <div className="p-4 border-b">
+          <div className="flex items-center border rounded-md">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 px-4 py-2 focus:outline-none"
+            />
+            <button
+              onClick={handleSearch}
+              className="px-4 py-2 text-my-blue"
+              title="Search"
+            >
+              <FiSearch size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Trending Section */}
+        <div className="px-4 py-3">
+          <h2 className="text-sm font-bold mb-2">TRENDING NOW</h2>
+          <div className="flex gap-2 flex-wrap">
+            <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+              <FiSearch className="inline mr-2" />
+              dempus
+            </button>
+            <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+              <FiSearch className="inline mr-2" />
+              sample
+            </button>
+            <button className="bg-gray-100 px-4 py-2 rounded-full text-xs">
+              <FiSearch className="inline mr-2" />
+              magnus
+            </button>
+          </div>
+        </div>
+
+        {/* Popular Products */}
+        <div className="px-4 py-3 border-t">
+          <h2 className="text-sm font-bold mb-2">PRODUCTS</h2>
+          <div className="overflow-x-scroll px-2">
+            <div className="flex space-x-4" style={{ minWidth: "200%" }}>
+              {filteredProducts.map((product, index) => (
+                <div key={index} className="w-1/3">
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+
+        </div>
+      </div>
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white  shadow-lg z-50">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-10">
         <div className="md:hidden flex justify-around items-center py-2">
           <Link href="/" className="flex flex-col items-center">
             <FiHome size={24} />
             <span className="text-xs">Home</span>
           </Link>
 
-          <Link href="/search" className="flex flex-col items-center">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="flex flex-col items-center"
+          >
             <FiSearch size={24} />
             <span className="text-xs">Search</span>
-          </Link>
+          </button>
 
           <Link href="/collection" className="flex flex-col items-center">
             <FiGrid size={24} />

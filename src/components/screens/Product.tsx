@@ -106,10 +106,9 @@ export default function Product() {
     },
   ];
 
-  // State to show only first 10 products initially
+  // State to show only first 12 products initially
   const [visibleProducts, setVisibleProducts] = useState(12);
 
-  console.log(setVisibleProducts)
   // Handle see more click
   const handleSeeMoreClick = () => {
     router.push("/products"); // Navigate to /products page
@@ -121,13 +120,14 @@ export default function Product() {
         Featured Products
       </h1>
 
-      <div className="flex flex-row gap-x-4 justify-center  flex-wrap w-full gap-8">
+      {/* Responsive Grid Layout: 2 columns for mobile, 3 for tablets, 4 for desktops */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8 w-full justify-center">
         {products.slice(0, visibleProducts).map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}
       </div>
 
-
+      {/* See More Button */}
       {visibleProducts < products.length && (
         <div className="flex justify-center mt-8">
           <button
