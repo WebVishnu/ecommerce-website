@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi"; // Import additional icons
 import { useRouter } from "next/navigation";
 import ProductCard from "./ProductCard";
+import { Product } from "@/types";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchOpen1, setSearchOpen1] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([] as any[]); // State to store filtered products
+  const [filteredProducts, setFilteredProducts] = useState([] as Product[]); // State to store filtered products
 
   const router = useRouter();
 
