@@ -20,7 +20,7 @@ export default function Page() {
         <Hero />
       </div>
 
-      <div className="max-w-[1200px] mx-auto flex flex-col space-y-12">
+      <div className="max-w-[1200px] mx-auto flex flex-col space-y-12 md:px-0 px-5">
         <VideoPlayer />
 
         {/* <PromoBanner /> */}
@@ -32,12 +32,13 @@ export default function Page() {
       </div>
 
       <Footer />
-      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-10 right-10 z-10 rounded-full overflow-hidden cursor-pointer">
+      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-20 right-5 z-10 rounded-full overflow-hidden cursor-pointer">
         <Image
           src={"/whatsapp-icon.png"}
-          height={70}
-          width={70}
+          height={60}
+          width={60}
           alt="whatsapp"
+          className="md:h-full w-12 md:w-full h-12"
         />
       </Link>
     </div>

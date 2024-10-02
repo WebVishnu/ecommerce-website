@@ -112,18 +112,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         <button
           className={`${
             isLiked ? "bg-blue-100" : "bg-white"
-          } text-gray-500 border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
+          } text-gray-500 hidden md:flex  border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
           onClick={handleLikeButtonClick}
         >
           <FiHeart size={20} />
         </button>
-        {/* <div
-          className={`w-[30%] hidden md:flex justify-end transition-transform duration-500 ${
-            showLikeButton ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          
-        </div> */}
 
         {/* Mobile Like Button (always visible) */}
         <div className="w-[30%] md:hidden flex justify-end">

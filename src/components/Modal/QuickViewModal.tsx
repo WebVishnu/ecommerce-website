@@ -1,6 +1,7 @@
-import { Product } from '@/types';
-import React, { useState, useEffect } from 'react';
-import { FiHeart, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { Product } from "@/types";
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { FiHeart, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface QuickViewModalProps {
   isOpen: boolean;
@@ -8,7 +9,11 @@ interface QuickViewModalProps {
   product: Product;
 }
 
-const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, product }) => {
+const QuickViewModal: React.FC<QuickViewModalProps> = ({
+  isOpen,
+  onClose,
+  product,
+}) => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(product.images[0]); // Use the first image as the default main image
   const [isLiked, setIsLiked] = useState(false); // New state for heart button
@@ -34,9 +39,12 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
   };
 
   const scrollThumbnails = (direction: string) => {
-    if (direction === 'left' && currentIndex > 0) {
+    if (direction === "left" && currentIndex > 0) {
       setCurrentIndex(currentIndex - 1); // Decrease the index
-    } else if (direction === 'right' && currentIndex < product.images.length - 1) {
+    } else if (
+      direction === "right" &&
+      currentIndex < product.images.length - 1
+    ) {
       setCurrentIndex(currentIndex + 1); // Increase the index
     }
   };
@@ -47,7 +55,10 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg relative w-[90%] md:max-w-4xl max-h-[90%] h-auto overflow-y-auto mx-auto">
         {/* Close Button */}
-        <button className="absolute top-0 right-0 bg-black text-white p-2" onClick={onClose}>
+        <button
+          className="absolute top-0 right-0 bg-black text-white p-2"
+          onClick={onClose}
+        >
           <FiX size={24} />
         </button>
 
@@ -57,7 +68,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
           <div className="flex flex-col w-full md:w-1/2 items-center">
             {/* Main Product Image */}
             <div className="w-full">
-              <img
+              <Image
                 src={mainImage}
                 alt={product.name}
                 className="rounded-lg w-full h-48 sm:h-64 md:h-72 object-cover"
@@ -69,7 +80,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
               {/* Left Arrow */}
               {currentIndex > 0 && (
                 <button
-                  onClick={() => scrollThumbnails('left')}
+                  onClick={() => scrollThumbnails("left")}
                   className="absolute left-0 z-10 bg-gray-200 p-2 rounded-full shadow-md"
                 >
                   <FiChevronLeft size={20} />
@@ -80,11 +91,11 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
               <div className="flex overflow-x-scroll space-x-2 w-[80%] px-4">
                 {product.images.map((image: string, index: number) => (
                   <div key={index} className="min-w-[20%] cursor-pointer">
-                    <img
+                    <Image
                       src={image}
                       alt={product.name}
                       className={`rounded-lg w-full h-16 sm:h-24 object-cover transition-transform duration-200 ${
-                        currentIndex === index ? 'border-2 border-blue-500' : ''
+                        currentIndex === index ? "border-2 border-blue-500" : ""
                       }`}
                       onClick={() => handleThumbnailClick(image, index)}
                     />
@@ -95,7 +106,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
               {/* Right Arrow */}
               {currentIndex < product.images.length - 1 && (
                 <button
-                  onClick={() => scrollThumbnails('right')}
+                  onClick={() => scrollThumbnails("right")}
                   className="absolute right-0 z-10 bg-gray-200 p-2 rounded-full shadow-md"
                 >
                   <FiChevronRight size={20} />
@@ -106,11 +117,19 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
 
           {/* Product Information */}
           <div className="w-full md:w-1/2">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">{product.name}</h2>
-            <p className="text-xs sm:text-sm text-gray-600 mb-2">Vendor: {product.vendor}</p>
-            <p className="text-xs sm:text-sm text-gray-600 mb-2">Availability: {product.availability}</p>
-            <p className="text-xs sm:text-sm text-gray-600 mb-4">Product Type: {product.type}</p>
-            
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
+              {product.name}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-600 mb-2">
+              Vendor: {product.vendor}
+            </p>
+            <p className="text-xs sm:text-sm text-gray-600 mb-2">
+              Availability: {product.availability}
+            </p>
+            <p className="text-xs sm:text-sm text-gray-600 mb-4">
+              Product Type: {product.type}
+            </p>
+
             {/* Price */}
             <div className="flex items-center mb-2">
               <span className="line-through text-gray-500 text-sm sm:text-base mr-2">
@@ -122,7 +141,9 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
             </div>
 
             {/* Hurry Up Notification */}
-            <p className="text-xs sm:text-sm text-red-500 mb-4">Hurry up! Only {product.stock} left</p>
+            <p className="text-xs sm:text-sm text-red-500 mb-4">
+              Hurry up! Only {product.stock} left
+            </p>
 
             {/* Quantity Selector */}
             <div className="flex items-center mb-4">
@@ -134,7 +155,9 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
                 >
                   −
                 </button>
-                <span className="px-4 py-1 text-sm sm:text-base">{quantity}</span>
+                <span className="px-4 py-1 text-sm sm:text-base">
+                  {quantity}
+                </span>
                 <button
                   className="px-2 py-1 text-lg sm:text-xl"
                   onClick={handleIncreaseQuantity}
@@ -145,7 +168,12 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
             </div>
 
             {/* Subtotal */}
-            <p className="mb-4 text-sm sm:text-base">Subtotal: ₹{(product.salePrice * quantity).toFixed(2)}</p>
+            <p className="mb-4 text-sm sm:text-base">
+              Subtotal: ₹
+              {(product.salePrice ? product.salePrice : 0 * quantity).toFixed(
+                2
+              )}
+            </p>
 
             {/* Add To Cart Button */}
             <div className="flex flex-row gap-x-2 sm:gap-x-4 mb-2 w-full items-center">
@@ -158,7 +186,7 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
               <div className="flex w-[20%]">
                 <button
                   className={`${
-                    isLiked ? 'bg-blue-100' : 'bg-white'
+                    isLiked ? "bg-blue-100" : "bg-white"
                   } text-gray-500 border border-gray-300 rounded-full p-2 sm:p-3 shadow transition-colors duration-300`}
                   onClick={handleLikeButtonClick}
                 >
@@ -174,7 +202,10 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
                 id="terms"
                 className="mr-2 cursor-pointer"
               />
-              <label htmlFor="terms" className="text-xs sm:text-sm text-gray-600">
+              <label
+                htmlFor="terms"
+                className="text-xs sm:text-sm text-gray-600"
+              >
                 I agree with Terms & Conditions
               </label>
             </div>
@@ -186,7 +217,8 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
 
             {/* Customer Viewing Info */}
             <p className="text-xs sm:text-sm text-gray-600">
-              👁️ {product.customersViewing} customers are viewing this product
+              👁️ {product.customersViewing ? product.customersViewing : 0}
+              customers are viewing this product
             </p>
           </div>
         </div>
