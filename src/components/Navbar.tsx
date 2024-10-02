@@ -126,21 +126,21 @@ const Navbar = () => {
                 className="w-[50%] h-20 object-contain"
               />
               <div className="hidden lg:flex flex-col">
-                <span className="text-my-blue text-sm">Available 24/7 at</span>
-                <span className="text-my-blue font-bold text-sm">
-                  091 234-Vitco
+                <span className="text-my-blue lg:text-sm text-xs">Available&nbsp;24/7&nbsp;at</span>
+                <span className="text-my-blue font-bold lg:text-sm text-xs">
+                  +91&nbsp;9917672211
                 </span>
               </div>
             </div>
 
             {/* Center Section: Search Bar */}
-            <div className="relative w-[40%] hidden lg:flex items-center">
+            <div className="relative w-full hidden lg:flex items-center mx-12 bg-gray-100 rounded-md">
               <input
                 type="text"
                 placeholder="Search the store"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none"
+                className="w-full px-4 py-2 text-sm focus:outline-none bg-gray-100 rounded-md"
               />
               <button
                 onClick={handleSearch}
@@ -151,22 +151,22 @@ const Navbar = () => {
             </div>
 
             {/* Right Section - Icons */}
-            <div className="hidden lg:flex w-[15%] mr-4 justify-between items-center space-x-6 text-my-blue text-sm">
+            <div className="hidden lg:flex w-[15%] mr-4 justify-between items-center space-x-6 text-my-blue text-xs">
               <Link href="/wishlists" className="flex flex-col items-center">
                 <FiHeart size={20} />
-                <span>Wish Lists</span>
+                <span className="hover:font-bold">Wish&nbsp;Lists</span>
               </Link>
 
               <Link href="/sign-in" className="flex flex-col items-center">
                 <FiUser size={20} />
-                <span>Sign In</span>
+                <span className="hover:font-bold">Sign&nbsp;In</span>
               </Link>
               <Link
                 href="/cart"
                 className="flex flex-col items-center relative"
               >
                 <FiShoppingCart size={20} />
-                <span>Cart</span>
+                <span className="hover:font-bold">Cart</span>
                 <div className="absolute -top-3 -right-2 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   0
                 </div>

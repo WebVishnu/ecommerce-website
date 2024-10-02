@@ -14,19 +14,19 @@ export default function Page() {
       {/* Navbar Component */}
       <Navbar />
 
-      <div className="pt-20"> 
+      <div className="pt-20">
         <Hero />
       </div>
 
       <VideoPlayer />
 
-<PromoBanner />
-<CategorySlider />
+      <PromoBanner />
+      <CategorySlider />
       {/* Product Section */}
       <div className="px-4">
         <Product />
       </div>
-      
+
       <Footer />
     </div>
   );

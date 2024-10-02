@@ -21,7 +21,7 @@ const categories = [
 
 const CategorySlider = () => {
   return (
-    <div className="py-8 px-4 md:px-10">
+    <div className="py-8 max-w-[1200px] mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-sm md:text-2xl font-bold">Shop By Categories</h2>
         <Link href="/all-categories" className="text-blue-500">
