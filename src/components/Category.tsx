@@ -7,22 +7,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const categories = [
-  { name: 'Mobile Phones', image: '/products/p1.png' },
-  { name: 'Laptops & Tablets', image: '/products/p2.jpg' },
-  { name: 'Televisions', image: '/products/p3.jpg' },
-  { name: 'PCs & Accessories', image: '/products/p4.jpg' },
-  { name: 'Audio & Video', image: '/products/p5.jpeg' },
-  { name: 'Mobile Phones', image: '/products/p1.png' },
-  { name: 'Laptops & Tablets', image: '/products/p2.jpg' },
-  { name: 'Televisions', image: '/products/p3.jpg' },
-  { name: 'PCs & Accessories', image: '/products/p4.jpg' },
-  { name: 'Audio & Video', image: '/products/p5.jpeg' },
+  { name: 'Milk Analyzer', image: 'http://5.imimg.com/data5/SELLER/Default/2022/8/NP/KC/AN/12804014/v-bond-500x500.jpg' },
+  { name: 'Khoya Making Machine', image: 'http://5.imimg.com/data5/SELLER/Default/2024/3/403260869/YM/IX/IC/12804014/khoya-making-machine-120-ltr-500x500.jpeg' },
+  { name: 'Milk Vending Machine', image: 'http://5.imimg.com/data5/DW/AF/AN/SELLER-12804014/milk-vending-machine-500x500.jpg' },
+  { name: 'Cream Separator Machine', image: 'http://5.imimg.com/data5/SELLER/Default/2023/5/310270409/DF/GN/OA/12804014/0i6a0578-500x500.jpeg' },
+  { name: 'Milk Cooler', image: 'http://5.imimg.com/data5/SELLER/Default/2023/5/310270150/CU/PQ/VV/12804014/ss-bulk-milk-cooler-tank-500x500.jpeg' },
+  { name: 'DEEP FREEZER', image: 'http://5.imimg.com/data5/SELLER/Default/2023/5/310270516/NF/MN/TG/12804014/deep-freezer-500x500.jpeg' },
+  { name: 'Inverter Battery', image: 'http://5.imimg.com/data5/SELLER/Default/2024/3/400053328/FX/GW/UH/12804014/mini-v-bond-inbuilt-battery-24-ah-500x500.jpeg' },
+  { name: 'Milking Machine', image: 'http://5.imimg.com/data5/SELLER/Default/2020/10/WE/SF/VM/12804014/img-20200519-wa0018-500x500.jpg' },
+  { name: 'Can Scrubber', image: 'http://5.imimg.com/data5/SELLER/Default/2020/10/IL/SK/UL/12804014/can-scrubber-500x500.jpg' },
+  { name: 'Dairy Products', image: 'http://5.imimg.com/data5/SELLER/Default/2024/1/377585162/JX/VG/HB/12804014/whatsapp-image-2024-01-16-at-12-39-59-pm-500x500.jpeg' },
 ];
 
 const CategorySlider = () => {
   return (
-    <div className="py-8 max-w-[1200px] mx-auto">
-      <div className="flex justify-between items-center mb-4">
+    <div className="mx-auto">
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-sm md:text-2xl font-bold">Shop By Categories</h2>
         <Link href="/all-categories" className="text-blue-500">
         View all

@@ -2,7 +2,7 @@ import React from 'react';
 
 function VideoPlayer() {
   return (
-    <div className="w-full max-w-6xl relative border-2 border-gray-200 rounded-lg shadow-lg mx-auto mt-8">
+    <div className="w-full relative border-2 border-gray-200 rounded-lg shadow-lg mx-auto mt-8">
       <video
         className="w-full h-auto"
         controls

@@ -1,6 +1,14 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { FaFacebookF, FaInstagram, FaPinterestP, FaSnapchatGhost, FaTwitter, FaPlus, FaMinus } from 'react-icons/fa';
+import { useState } from "react";
+import Link from "next/link";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaPinterestP,
+  FaSnapchatGhost,
+  FaTwitter,
+  FaPlus,
+  FaMinus,
+} from "react-icons/fa";
 
 export default function Footer() {
   // State to manage the open sections in the accordion
@@ -11,68 +19,50 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-100 text-gray-800 px-6 py-8 md:px-10 md:py-12">
-      <div className="container mx-auto">
+    <footer className="bg-gray-100 text-gray-800 py-8 md:py-12 mt-12">
+      <div className="container mx-auto max-w-[1200px] md:px-12 px-5">
         {/* Accordion for mobile */}
         <div className="md:hidden">
           {/* Shop Section */}
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('shop')}
+              onClick={() => toggleSection("shop")}
               className="flex justify-between items-center w-full text-left font-bold text-lg py-2 border-b border-gray-300"
             >
               <span>SHOP</span>
-              {openSection === 'shop' ? <FaMinus size={20} /> : <FaPlus size={20} />}
+              {openSection === "shop" ? (
+                <FaMinus size={20} />
+              ) : (
+                <FaPlus size={20} />
+              )}
             </button>
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                openSection === 'shop' ? 'max-h-96' : 'max-h-0'
+                openSection === "shop" ? "max-h-96" : "max-h-0"
               }`}
             >
               <ul className="mt-2 space-y-2">
                 {[
-                  'Electronics',
-                  'Computers & Laptops',
-                  'Smartphones & Tablets',
-                  'Cameras',
-                  'Video Games & Systems',
-                  'Home Furniture',
-                  'Weekly Special',
+                  "Milk Analyzer",
+                  "Khoya Making Machine",
+                  "Milk Vending Machine",
+                  "Cream Separator Machine",
+                  "Milk Cooler",
+                  "DEEP FREEZER",
+                  "Inverter Battery",
+                  "Milking Machine",
+                  "Can Scrubber",
+                  "Dairy Products",
                 ].map((item) => (
                   <li key={item}>
-                    <Link href="#" className="hover:text-my-blue transition duration-300">
+                    <Link
+                      href="#"
+                      className="hover:text-my-blue transition duration-300"
+                    >
                       {item}
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Top Brands Section */}
-          <div className="mb-4">
-            <button
-              onClick={() => toggleSection('brands')}
-              className="flex justify-between items-center w-full text-left font-bold text-lg py-2 border-b border-gray-300"
-            >
-              <span>TOP BRANDS</span>
-              {openSection === 'brands' ? <FaMinus size={20} /> : <FaPlus size={20} />}
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                openSection === 'brands' ? 'max-h-96' : 'max-h-0'
-              }`}
-            >
-              <ul className="mt-2 space-y-2">
-                {['Coco Lee', 'Anna', 'French Connection', 'Jimmy Choo', 'Chanel', 'Collette', 'View All'].map(
-                  (item) => (
-                    <li key={item}>
-                      <Link href="#" className="hover:text-my-blue transition duration-300">
-                        {item}
-                      </Link>
-                    </li>
-                  )
-                )}
               </ul>
             </div>
           </div>
@@ -80,63 +70,53 @@ export default function Footer() {
           {/* Further Info Section */}
           <div className="mb-4">
             <button
-              onClick={() => toggleSection('info')}
+              onClick={() => toggleSection("info")}
               className="flex justify-between items-center w-full text-left font-bold text-lg py-2 border-b border-gray-300"
             >
               <span>FURTHER INFO.</span>
-              {openSection === 'info' ? <FaMinus size={20} /> : <FaPlus size={20} />}
+              {openSection === "info" ? (
+                <FaMinus size={20} />
+              ) : (
+                <FaPlus size={20} />
+              )}
             </button>
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                openSection === 'info' ? 'max-h-96' : 'max-h-0'
-              }`}
-            >
-              <ul className="mt-2 space-y-2">
-                {['About Us', 'Contact Us', 'Shipping & Return', 'Privacy Policy', 'Terms & Conditions', 'Blog'].map(
-                  (item) => (
-                    <li key={item}>
-                      <Link href="#" className="hover:text-my-blue transition duration-300">
-                        {item}
-                      </Link>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          </div>
-
-          {/* Customer Service Section */}
-          <div className="mb-4">
-            <button
-              onClick={() => toggleSection('service')}
-              className="flex justify-between items-center w-full text-left font-bold text-lg py-2 border-b border-gray-300"
-            >
-              <span>CUSTOMER SERVICE</span>
-              {openSection === 'service' ? <FaMinus size={20} /> : <FaPlus size={20} />}
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                openSection === 'service' ? 'max-h-96' : 'max-h-0'
+                openSection === "info" ? "max-h-96" : "max-h-0"
               }`}
             >
               <ul className="mt-2 space-y-2">
                 {[
-                  'Search Terms',
-                  'Advanced Search',
-                  'Orders And Returns',
-                  'Contact Us',
-                  'Theme FAQs',
-                  'Consultant',
-                  'Store Locations',
+                  "About Us",
+                  "Contact Us",
+                  "Shipping & Return",
+                  "Privacy Policy",
+                  "Terms & Conditions",
                 ].map((item) => (
                   <li key={item}>
-                    <Link href="#" className="hover:text-my-blue transition duration-300">
+                    <Link
+                      href="#"
+                      className="hover:text-my-blue transition duration-300"
+                    >
                       {item}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+          </div>
+          <div className="mb-4 lg:mb-0 space-y-2">
+            <p>
+              <strong>Address:</strong> Shop No. LG 15, 16, Under Dena Bank
+              Shivpriya Complex, Firozabad Road, Rambagh, BOI, Agra-282006,
+              Uttar Pradesh, India
+            </p>
+            <p>
+              <strong>Phone:</strong> +91 9917673301
+            </p>
+            <p>
+              <strong>Email:</strong> team@vitcoimpex.in
+            </p>
           </div>
         </div>
 
@@ -146,110 +126,74 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4 text-my-blue">SHOP</h3>
             <ul className="space-y-2">
-              {['Electronics', 'Computers & Laptops', 'Smartphones & Tablets', 'Cameras', 'Video Games & Systems', 'Home Furniture', 'Weekly Special'].map((item) => (
+              {[
+                "Milk Analyzer",
+                "Khoya Making Machine",
+                "Milk Vending Machine",
+                "Cream Separator Machine",
+                "Milk Cooler",
+                "DEEP FREEZER",
+                "Inverter Battery",
+                "Milking Machine",
+                "Can Scrubber",
+                "Dairy Products",
+              ].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="hover:text-my-blue transition duration-300">
+                  <Link
+                    href="#"
+                    className="hover:text-my-blue transition duration-300"
+                  >
                     {item}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          {/* Top Brands Column */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 text-my-blue">TOP BRANDS</h3>
-            <ul className="space-y-2">
-              {['Coco Lee', 'Anna', 'French Connection', 'Jimmy Choo', 'Chanel', 'Collette', 'View All'].map(
-                (item) => (
-                  <li key={item}>
-                    <Link href="#" className="hover:text-my-blue transition duration-300">
-                      {item}
-                    </Link>
-                  </li>
-                )
-              )}
             </ul>
           </div>
 
           {/* Further Info Column */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-my-blue">FURTHER INFO.</h3>
-            <ul className="space-y-2">
-              {['About Us', 'Contact Us', 'Shipping & Return', 'Privacy Policy', 'Terms & Conditions', 'Blog'].map(
-                (item) => (
-                  <li key={item}>
-                    <Link href="#" className="hover:text-my-blue transition duration-300">
-                      {item}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-
-          {/* Customer Service Column */}
-          <div>
-            <h3 className="font-bold text-lg mb-4 text-my-blue">CUSTOMER SERVICE</h3>
+            <h3 className="font-bold text-lg mb-4 text-my-blue">
+              FURTHER INFO.
+            </h3>
             <ul className="space-y-2">
               {[
-                'Search Terms',
-                'Advanced Search',
-                'Orders And Returns',
-                'Contact Us',
-                'Theme FAQs',
-                'Consultant',
-                'Store Locations',
+                "About Us",
+                "Contact Us",
+                "Shipping & Return",
+                "Privacy Policy",
+                "Terms & Conditions",
               ].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="hover:text-my-blue transition duration-300">
+                  <Link
+                    href="#"
+                    className="hover:text-my-blue transition duration-300"
+                  >
                     {item}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* Contact Info and Social Media */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center border-t border-gray-300 pt-8">
-          {/* Contact Info */}
-          <div className="mb-4 lg:mb-0 space-y-2">
+          <div className="mb-4 lg:mb-0 space-y-2 col-span-2">
             <p>
-              <strong>Address:</strong> 685 Market Street, San Francisco, CA 94105, US
+              <strong>Address:</strong> Shop No. LG 15, 16, Under Dena Bank
+              Shivpriya Complex, Firozabad Road, Rambagh, BOI, Agra-282006,
+              Uttar Pradesh, India
             </p>
             <p>
-              <strong>Phone:</strong> (415) 555-5555
+              <strong>Phone:</strong> +91 9917673301
             </p>
             <p>
-              <strong>Email:</strong> vitco@domain.com
+              <strong>Email:</strong> team@vitcoimpex.in
             </p>
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex space-x-4">
-            {[
-              { icon: <FaFacebookF size={20} />, label: 'Facebook' },
-              { icon: <FaInstagram size={20} />, label: 'Instagram' },
-              { icon: <FaPinterestP size={20} />, label: 'Pinterest' },
-              { icon: <FaSnapchatGhost size={20} />, label: 'Snapchat' },
-              { icon: <FaTwitter size={20} />, label: 'Twitter' },
-            ].map((social) => (
-              <Link
-                key={social.label}
-                href="#"
-                className="bg-white text-gray-600 hover:text-white hover:bg-my-blue p-2 rounded-full transition duration-300 ease-in-out"
-                aria-label={social.label}
-              >
-                {social.icon}
-              </Link>
-            ))}
           </div>
         </div>
 
         {/* Copyright and Payment Methods */}
         <div className="mt-8 flex flex-col lg:flex-row justify-between items-start lg:items-center border-t border-gray-300 pt-8">
-          <p className="text-sm text-gray-600">&copy; 2024, Vitco. All Rights Reserved. Themes By Vitco</p>
+          <p className="text-sm text-gray-600">
+            &copy; 2024, Vitco. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

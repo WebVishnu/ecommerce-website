@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import VideoPlayer from "@/components/screens/Video";
 import PromoBanner from "@/components/PromoCode";
 import CategorySlider from "@/components/Category";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -18,16 +20,26 @@ export default function Page() {
         <Hero />
       </div>
 
-      <VideoPlayer />
+      <div className="max-w-[1200px] mx-auto flex flex-col space-y-12">
+        <VideoPlayer />
 
-      <PromoBanner />
-      <CategorySlider />
-      {/* Product Section */}
-      <div className="px-4">
+        {/* <PromoBanner /> */}
+        <div>
+          <CategorySlider />
+        </div>
+        {/* Product Section */}
         <Product />
       </div>
 
       <Footer />
+      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-10 right-10 z-10 rounded-full overflow-hidden cursor-pointer">
+        <Image
+          src={"/whatsapp-icon.png"}
+          height={70}
+          width={70}
+          alt="whatsapp"
+        />
+      </Link>
     </div>
   );
 }
