@@ -139,6 +139,38 @@ html {
 }
 
 
+
 .no-scroll {
   overflow: hidden;
+}
+
+/* Custom styles for Swiper arrows */
+.category-slider .swiper-button-next,
+.category-slider .swiper-button-prev {
+  width: 30px; /* Set the size of the arrows */
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  border-radius: 50%; /* Make the arrows circular */
+  color: white; /* White arrow color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-slider .swiper-button-next:after,
+.category-slider .swiper-button-prev:after {
+  font-size: 16px; /* Adjust arrow size */
+}
+
+.category-slider .swiper-button-next {
+  right: 0px; /* Positioning adjustments */
+}
+
+.category-slider .swiper-button-prev {
+  left: 0px;
+}
+
+.category-slider .swiper-button-next:hover,
+.category-slider .swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
 }

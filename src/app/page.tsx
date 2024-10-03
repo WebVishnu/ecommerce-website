@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
 import Product from "@/components/screens/Product";
 import Hero from "@/components/screens/Hero";
 import Footer from "@/components/Footer";
@@ -9,6 +8,7 @@ import PromoBanner from "@/components/PromoCode";
 import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Page() {
   return (
@@ -16,11 +16,11 @@ export default function Page() {
       {/* Navbar Component */}
       <Navbar />
 
-      <div className="pt-20">
+      <div className="">
         <Hero />
       </div>
 
-      <div className="max-w-[1200px] mx-auto flex flex-col space-y-12">
+      <div className="max-w-[1200px] px-3 md:px-0 mx-auto flex flex-col space-y-12">
         <VideoPlayer />
 
         {/* <PromoBanner /> */}
@@ -32,7 +32,7 @@ export default function Page() {
       </div>
 
       <Footer />
-      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-10 right-10 z-10 rounded-full overflow-hidden cursor-pointer">
+      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-20 right-6 md:bottom-10 md:right-10 z-10 rounded-full overflow-hidden cursor-pointer">
         <Image
           src={"/whatsapp-icon.png"}
           height={70}

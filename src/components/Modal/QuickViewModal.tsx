@@ -11,7 +11,7 @@ interface QuickViewModalProps {
 const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, product }) => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(product.images[0]); // Use the first image as the default main image
-  const [isLiked, setIsLiked] = useState(false); // New state for heart button
+  const [isLiked, setIsLiked] = useState(false); // State for heart button
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current index for thumbnails
 
   const handleLikeButtonClick = () => {
@@ -44,10 +44,12 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
+    {/* Modal Overlay: Click to close */}
+    <div className="absolute inset-0" onClick={onClose}></div>
       <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg relative w-[90%] md:max-w-4xl max-h-[90%] h-auto overflow-y-auto mx-auto">
         {/* Close Button */}
-        <button className="absolute top-0 right-0 bg-black text-white p-2" onClick={onClose}>
+        <button className="absolute top-0 right-0 bg-black text-white p-2 rounded-bl-xl rounded-tr-lg z-50 " onClick={onClose}>
           <FiX size={24} />
         </button>
 
@@ -113,12 +115,20 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
             
             {/* Price */}
             <div className="flex items-center mb-2">
-              <span className="line-through text-gray-500 text-sm sm:text-base mr-2">
-                ₹{product.originalPrice}
-              </span>
-              <span className="text-red-500 text-lg sm:text-xl font-bold">
-                ₹{product.salePrice}
-              </span>
+              {product.salePrice ? (
+                <>
+                  <span className="line-through text-gray-500 text-sm sm:text-base mr-2">
+                    ₹{product.originalPrice}
+                  </span>
+                  <span className="text-red-500 text-lg sm:text-xl font-bold">
+                    ₹{product.salePrice}
+                  </span>
+                </>
+              ) : (
+                <span className="text-red-500 text-lg sm:text-xl font-bold">
+                  ₹{product.originalPrice}
+                </span>
+              )}
             </div>
 
             {/* Hurry Up Notification */}
@@ -145,7 +155,12 @@ const QuickViewModal: React.FC<QuickViewModalProps> = ({ isOpen, onClose, produc
             </div>
 
             {/* Subtotal */}
-            <p className="mb-4 text-sm sm:text-base">Subtotal: ₹{(product.salePrice * quantity).toFixed(2)}</p>
+            <p className="mb-4 text-sm sm:text-base">
+              Subtotal: ₹
+              {(
+                (product.salePrice ? product.salePrice : product.originalPrice) * quantity
+              ).toFixed(2)}
+            </p>
 
             {/* Add To Cart Button */}
             <div className="flex flex-row gap-x-2 sm:gap-x-4 mb-2 w-full items-center">
