@@ -48,11 +48,11 @@ const montserratThin = localFont({
   variable: "--font-montserrat-thin",
 });
 
-
 // Metadata
 export const metadata: Metadata = {
-  title: "Vitco Impex",
-  description: "Vitco Impex",
+  title: "Vitco impex - Dairy machineries manufactures",
+  description:
+    "“Vijay Trading Company”, are engaged in Manufacturing, Trading, and Wholesaling of a wide range of Milk Analyzer, Packing Machine, Vending Machine and much more. Our company is Sole Proprietorship (Individual), based company. Under the management of “Pradeep Goswami”, we have gained huge popularity among clients.",
 };
 
 // RootLayout component

@@ -9,6 +9,9 @@ import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
+import { Metadata } from "next";
+
+
 
 export default function Page() {
   return (
@@ -32,7 +35,11 @@ export default function Page() {
       </div>
 
       <Footer />
-      <Link href={"https://wa.me/919917673301"} target="_blank" className="fixed bottom-20 right-5 z-10 rounded-full overflow-hidden cursor-pointer">
+      <Link
+        href={"https://wa.me/919917673301"}
+        target="_blank"
+        className="fixed bottom-20 right-5 z-10 rounded-full overflow-hidden cursor-pointer"
+      >
         <Image
           src={"/whatsapp-icon.png"}
           height={60}
