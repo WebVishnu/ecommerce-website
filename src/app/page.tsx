@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
 import Product from "@/components/screens/Product";
 import Hero from "@/components/screens/Hero";
 import Footer from "@/components/Footer";
@@ -9,6 +8,7 @@ import PromoBanner from "@/components/PromoCode";
 import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Page() {
   return (
@@ -16,7 +16,7 @@ export default function Page() {
       {/* Navbar Component */}
       <Navbar />
 
-      <div className="pt-20">
+      <div className="">
         <Hero />
       </div>
 

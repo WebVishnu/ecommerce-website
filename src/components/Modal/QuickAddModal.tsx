@@ -1,7 +1,7 @@
-import { Product } from "@/types";
-import Image from "next/image";
-import React, { useState } from "react";
-import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { Product } from '@/types';
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 interface QuickAddModalProps {
   isOpen: boolean;
@@ -16,6 +16,19 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Track the current image index
+
+  // Disable background scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    } else {
+      document.body.style.overflow = 'auto'; // Re-enable background scrolling
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'; // Clean up when modal is closed or component is unmounted
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -38,13 +51,14 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg relative w-[90%] md:max-w-4xl mx-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[9999]">
+      {/* Modal Overlay: Click to close */}
+      <div className="absolute inset-0" onClick={onClose}></div>
+
+      {/* Modal Content */}
+      <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg relative w-full max-w-lg md:max-w-4xl mx-auto max-h-[calc(100vh-10em)] overflow-y-auto">
         {/* Close Button */}
-        <button
-          className="absolute top-0 z-10 rounded-tr-lg right-0 bg-black text-white p-2"
-          onClick={onClose}
-        >
+        <button className="absolute top-0 right-0 bg-black text-white p-2 rounded-bl-xl rounded-tr-lg z-50 " onClick={onClose}>
           <FiX size={24} />
         </button>
 
@@ -58,6 +72,8 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
                 src={product.images[currentImageIndex]} // Display the current image based on index
                 alt={product.name}
                 className="rounded-lg w-full h-48 sm:h-64 md:h-72 object-cover"
+                height={500}
+                width={500}
               />
             </div>
 
@@ -81,9 +97,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
               {product.images.map((_, index) => (
                 <span
                   key={index}
-                  className={`w-2 h-2 rounded-full cursor-pointer ${
-                    currentImageIndex === index ? "bg-blue-500" : "bg-gray-300"
-                  }`}
+                  className={`w-2 h-2 rounded-full cursor-pointer ${currentImageIndex === index ? 'bg-blue-500' : 'bg-gray-300'}`}
                   onClick={() => setCurrentImageIndex(index)} // Change image on dot click
                 ></span>
               ))}
@@ -96,12 +110,14 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
               {product.name}
             </h2>
             <div className="flex items-center mb-2">
-              <span className="line-through text-gray-500 text-sm sm:text-base mr-2">
-                ₹{product.originalPrice}
-              </span>
-              <span className="text-red-500 text-lg sm:text-xl font-bold">
-                ₹{product.salePrice}
-              </span>
+              {product.onSale ? (
+                <>
+                  <span className="line-through text-gray-500 text-sm sm:text-base mr-2">₹{product.originalPrice}</span>
+                  <span className="text-red-500 text-lg sm:text-xl font-bold">₹{product.salePrice}</span>
+                </>
+              ) : (
+                <span className="text-gray-500 text-lg sm:text-xl font-bold">₹{product.originalPrice}</span>
+              )}
             </div>
 
             {/* Quantity Selector */}
@@ -126,23 +142,22 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({
               </div>
             </div>
 
-            {/* Subtotal */}
             <p className="mb-4 text-sm sm:text-base">
               Subtotal: ₹
-              {(product.salePrice ? product.salePrice : 0 * quantity).toFixed(
-                2
-              )}
+              {(
+                (Number(product.salePrice) > 0 ? Number(product.salePrice) : Number(product.originalPrice)) * quantity
+              ).toFixed(2)}
             </p>
 
-            {/* Add To Cart Button */}
-            <button className="bg-my-blue text-white w-full py-2 sm:py-3 rounded-full">
-              Add To Cart
-            </button>
+            <div className="flex md:flex-col gap-y-3 flex-row items-center gap-x-4">
+              {/* Add To Cart Button */}
+              <button className="bg-my-blue text-white w-full py-2 sm:py-3 rounded-full">Add To Cart</button>
 
-            {/* View Full Details Button */}
-            <button className="mt-4 bg-white text-my-bbg-my-blue w-full py-2 sm:py-3 rounded-full border border-my-bbg-my-blue">
-              View Full Details
-            </button>
+              {/* View Full Details Button */}
+              <button className="bg-white text-my-blue w-full py-2 sm:py-3 rounded-full border border-my-blue">
+                View Full Details
+              </button>
+            </div>
           </div>
         </div>
       </div>

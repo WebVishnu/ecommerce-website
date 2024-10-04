@@ -312,7 +312,13 @@ const Navbar = () => {
                       >
                         {filteredProducts.map((product, index) => (
                           <div key={index} className="w-1/3">
-                            <ProductCard product={product} />
+                            <ProductCard
+                              product={product}
+                              isQuickViewModalOpen={true}
+                              isQuickAddModalOpen={true}
+                              handleQuickViewClick={() => {}}
+                              handleQuickAddClick={() => {}}
+                            />
                           </div>
                         ))}
                       </div>
@@ -521,7 +527,13 @@ const Navbar = () => {
             <div className="flex space-x-4" style={{ minWidth: "200%" }}>
               {filteredProducts.map((product, index) => (
                 <div key={index} className="w-1/3">
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    isQuickViewModalOpen={true}
+                    isQuickAddModalOpen={true}
+                    handleQuickViewClick={() => {}}
+                    handleQuickAddClick={() => {}}
+                  />
                 </div>
               ))}
             </div>

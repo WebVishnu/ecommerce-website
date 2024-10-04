@@ -25,11 +25,11 @@ const CategorySlider = () => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-sm md:text-2xl font-bold">Shop By Categories</h2>
         <Link href="/all-categories" className="text-blue-500">
-        View all
+          View all
         </Link>
       </div>
 
-      <Swiper
+    <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={20}
         slidesPerView={2}
@@ -58,7 +58,7 @@ const CategorySlider = () => {
                 <Image
                   src={category.image}
                   alt={category.name}
-                  width={112} // 28*4 for large images
+                  width={112}
                   height={112}
                   objectFit="contain"
                 />

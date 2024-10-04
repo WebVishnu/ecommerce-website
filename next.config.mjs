@@ -6,6 +6,10 @@ const nextConfig = {
                 protocol: "http",
                 hostname: "5.imimg.com",
             },
+            {
+                protocol: "https",
+                hostname: "live.staticflickr.com",
+            },
         ]
     }
 };
