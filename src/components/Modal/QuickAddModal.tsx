@@ -1,4 +1,5 @@
 import { Product } from '@/types';
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
@@ -59,7 +60,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product 
           <div className="flex flex-col w-full md:w-1/2 items-center relative">
             {/* Main Product Image */}
             <div className="w-full">
-              <img
+              <Image
                 src={product.images[currentImageIndex]} // Display the current image based on index
                 alt={product.name}
                 className="rounded-lg w-full h-48 sm:h-64 md:h-72 object-cover"

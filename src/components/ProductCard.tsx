@@ -16,8 +16,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { images, name, originalPrice, salePrice, onSale } = product;
   const [isLiked, setIsLiked] = useState(false); // State for heart button
   const [isImageHovered, setIsImageHovered] = useState(false); // Track if the image is being hovered
-  const [quantity, setQuantity] = useState(1); // Manage the quantity
-
+const quantity = 1
+  
   const handleLikeButtonClick = () => {
     setIsLiked(!isLiked); // Toggle like state
   };

@@ -4,7 +4,6 @@ import Product from "@/components/screens/Product";
 import Hero from "@/components/screens/Hero";
 import Footer from "@/components/Footer";
 import VideoPlayer from "@/components/screens/Video";
-import PromoBanner from "@/components/PromoCode";
 import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";

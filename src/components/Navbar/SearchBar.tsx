@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiX } from 'react-icons/fi';
-import { useRouter } from 'next/navigation';
 import { Product } from '@/types';
-import QuickAddModal from '../Modal/QuickAddModal'; // Import Quick Add Modal
 import SearchProductCard from '../SearchProductCard';
 
 interface SearchBarProps {
@@ -12,12 +10,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ products, searchOpen, setSearchOpen }) => {
-  const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);  // State for Quick Add modal
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // State for the selected product
 
-  const router = useRouter();
-
-  // Dynamic trending keywords
   const trendingKeywords = ['dempus', 'sample', 'magnus', 'lorem', 'ipsum'];
 
   return (
