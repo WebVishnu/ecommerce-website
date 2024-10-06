@@ -1,11 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaPinterestP,
-  FaSnapchatGhost,
-  FaTwitter,
   FaPlus,
   FaMinus,
 } from "react-icons/fa";

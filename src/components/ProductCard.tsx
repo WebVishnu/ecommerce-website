@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
-import { FaEye } from "react-icons/fa";
 import { Product } from "@/types";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;
-  isQuickViewModalOpen: boolean;
-  isQuickAddModalOpen: boolean;
-  handleQuickViewClick: (product: Product) => void;
   handleQuickAddClick: (product: Product) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
-  isQuickViewModalOpen,
-  isQuickAddModalOpen,
-  handleQuickViewClick,
   handleQuickAddClick,
 }) => {
   const { images, name, originalPrice, salePrice, onSale } = product;
   const [isLiked, setIsLiked] = useState(false); // State for heart button
   const [isImageHovered, setIsImageHovered] = useState(false); // Track if the image is being hovered
+  const [quantity, setQuantity] = useState(1); // Manage the quantity
 
   const handleLikeButtonClick = () => {
     setIsLiked(!isLiked); // Toggle like state
   };
-
-  // Disable background scroll when modal is open
-  useEffect(() => {
-    if (isQuickViewModalOpen || isQuickAddModalOpen) {
-      document.body.classList.add("no-scroll"); // Add class to disable scrolling
-    } else {
-      document.body.classList.remove("no-scroll"); // Remove class to enable scrolling
-    }
-
-    return () => {
-      document.body.classList.remove("no-scroll"); // Cleanup in case of component unmount
-    };
-  }, [isQuickViewModalOpen, isQuickAddModalOpen]);
 
   return (
     <div className="relative border-2 rounded-lg p-4 sm:p-6 transition-transform duration-700 overflow-hidden group">
@@ -63,28 +45,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
           className="w-full h-36 sm:h-64 object-cover transform transition-transform duration-1000 hover:scale-105"
         />
 
-        {/* Quick View Button (visible on image hover, centered on image for desktop) */}
+        {/* Quick View Button */}
         <button
-          onClick={() => handleQuickViewClick(product)} // Pass the product to the handler
+          onClick={() => handleQuickAddClick(product)}
           className="hidden md:flex absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 text-sm text-gray-900 px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 group-hover:top-1/2 transition-all duration-500 ease-out"
         >
           Quick View
         </button>
       </div>
 
-      {/* Product Name with Hover Effect - Responsive Font */}
+      {/* Product Name */}
       <h3 className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer hover:font-bold font-medium transition-colors duration-300 hover:text-my-blue text-center break-words">
-  {name}
-</h3>
+        {name}
+      </h3>
 
-
-      {/* Pricing - Responsive Font */}
+      {/* Pricing */}
       <div className="flex items-center justify-center mt-2 text-xs sm:text-sm md:text-base">
         {salePrice ? (
           <>
-            <span className="text-gray-500 line-through mr-2">
-              ₹{originalPrice}
-            </span>
+            <span className="text-gray-500 line-through mr-2">₹{originalPrice}</span>
             <span className="text-red-500 font-bold">₹{salePrice} / Piece</span>
           </>
         ) : (
@@ -92,14 +71,24 @@ const ProductCard: React.FC<ProductCardProps> = ({
         )}
       </div>
 
-      {/* Quick Add Button and Heart Button - Responsive Font */}
+      {/* Quick Add Button and Heart Button */}
       <div className="flex flex-row w-full mt-4 items-center justify-between">
-        <button
-          className="w-[70%] bg-white text-xs sm:text-sm md:text-base lg:text-lg text-my-blue font-medium hover:text-white py-2 rounded-full hover:bg-my-blue transition-colors duration-700 border-[1px] border-my-blue"
-          onClick={() => handleQuickAddClick(product)} // Pass the product to the handler
+        {/* Pass product data as query parameters, including the first image */}
+        <Link
+          href={{
+            pathname: "/checkout",
+            query: {
+              name,
+              originalPrice: originalPrice.toString(),
+              salePrice: salePrice?.toString() || "",
+              quantity: quantity.toString(),
+              imageUrl: images[0], // Pass the first image URL
+            },
+          }}
+          className="w-[70%] bg-white text-xs  items-center text-center sm:text-sm md:text-base lg:text-lg text-my-blue font-medium hover:text-white py-2 rounded-full hover:bg-my-blue transition-colors duration-700 border-[1px] border-my-blue"
         >
           Buy now
-        </button>
+        </Link>
 
         {/* Animated Like Button */}
         <button
@@ -111,14 +100,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <FiHeart size={20} />
         </button>
       </div>
-
-      {/* Quick View Button for Mobile */}
-      <button
-        className="text-black md:hidden flex absolute top-8 right-8"
-        onClick={() => handleQuickViewClick(product)} // Pass the product to the handler
-      >
-        <FaEye size={24} />
-      </button>
     </div>
   );
 };

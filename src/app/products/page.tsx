@@ -1,24 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // useRouter to programmatically navigate
 import ProductCard from "@/components/ProductCard";
-import QuickViewModal from "@/components/Modal/QuickViewModal";
 import QuickAddModal from "@/components/Modal/QuickAddModal";
 import type { Product } from "@/types";
 import ProductData from "@/json/ProductData";
 
 
 export default function Product() {
-  const router = useRouter();
   const products = ProductData(); 
-  // State to show only the first 12 products initially
   const [visibleProducts, setVisibleProducts] = useState(12);
 
   // State to track the selected product and modal visibility
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);
-  const [isQuickViewModalOpen, setIsQuickViewModalOpen] = useState(false);
 
   // Handle Quick Add button click
   const handleQuickAddClick = (product: Product) => {
@@ -26,15 +21,10 @@ export default function Product() {
     setIsQuickAddModalOpen(true); // Open Quick Add Modal
   };
 
-  // Handle Quick View button click
-  const handleQuickViewClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsQuickViewModalOpen(true); // Open Quick View Modal
-  };
 
   // Handle see more click
   const handleSeeMoreClick = () => {
-    setVisibleProducts((prev) => prev + 12); // Show 12 more products on each click
+    setVisibleProducts((prev) => prev + 12);
   };
 
   return (
@@ -48,7 +38,7 @@ export default function Product() {
             key={index}
             product={product}
             handleQuickAddClick={handleQuickAddClick}
-            handleQuickViewClick={handleQuickViewClick} isQuickViewModalOpen={false} isQuickAddModalOpen={false}          />
+                     />
         ))}
       </div>
 
@@ -64,16 +54,8 @@ export default function Product() {
         </div>
       )}
 
-      {/* Quick View Modal */}
-      {selectedProduct && (
-        <QuickViewModal
-          isOpen={isQuickViewModalOpen}
-          onClose={() => setIsQuickViewModalOpen(false)}
-          product={selectedProduct}
-        />
-      )}
-
-      {/* Quick Add Modal */}
+    
+    {/* Quick Add Modal */}
       {selectedProduct && (
         <QuickAddModal
           isOpen={isQuickAddModalOpen}
