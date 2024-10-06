@@ -28,7 +28,7 @@ export default function Product() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto font-[family-name:var(--font-montserrat-regular)] px-10 py-10">
       <h2 className="text-sm md:text-2xl font-bold mb-6">Our products</h2>
 
       {/* Responsive Grid Layout: 2 columns for mobile, 3 for tablets, 4 for desktops */}

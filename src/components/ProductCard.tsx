@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FiHeart } from "react-icons/fi";
 import { Product } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: Product;
@@ -18,12 +19,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const [isImageHovered, setIsImageHovered] = useState(false); // Track if the image is being hovered
 const quantity = 1
   
+const router = useRouter();
+
   const handleLikeButtonClick = () => {
     setIsLiked(!isLiked); // Toggle like state
   };
 
+  const handleProductClick = () => {
+    // Navigate to the product details page using the product ID
+    router.push(`/products/${product.id}`);
+  };
+
   return (
-    <div className="relative border-2 rounded-lg p-4 sm:p-6 transition-transform duration-700 overflow-hidden group">
+    <div className="relative border-2 rounded-lg p-4 sm:p-6 transition-transform duration-700 overflow-hidden group" onClick={handleProductClick}
+>
       {/* Sale Badge */}
       {onSale && (
         <span className="absolute top-2 left-2 bg-red-100 z-10 text-red-500 font-light italic px-2 py-1 rounded">

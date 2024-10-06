@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect, useRef } from "react";
 import {
   FiMenu,
@@ -92,7 +93,7 @@ const Navbar = () => {
   }, [searchRef]);
 
   return (
-    <header className="w-full fixed top-0 left-0 z-40">
+    <header className="w-full fixed top-0 left-0 z-40 font-[family-name:var(--font-montserrat-regular)]">
       <div
         className={`transform transition-transform bg-white duration-500 ease-in-out ${
           isScrolled && scrollDirection === "down"
