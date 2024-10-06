@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -39,7 +39,10 @@ declare global {
   }
 }
 
-export default function Checkout() {
+// Define a fallback component for loading state
+const Loading = () => <div>Loading...</div>;
+
+function CheckoutComponent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const name = searchParams.get('name');
@@ -78,7 +81,7 @@ export default function Checkout() {
     return `ORDER-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   };
 
-  const [orderId] = useState(generateOrderId()); 
+  const [orderId] = useState(generateOrderId());
 
   const handleQuantityChange = (type: string) => {
     if (type === 'decrease' && quantity > 1) {
@@ -107,10 +110,10 @@ export default function Checkout() {
       alert('Razorpay SDK is still loading. Please wait...');
       return;
     }
-  
+
     const options: RazorpayOptions = {
       key: 'rzp_test_EkdZaedpnLu4rz',
-      amount: Number(totalPrice) * 100, // Razorpay amount is in paise
+      amount: Number(totalPrice) * 100,
       currency: 'INR',
       name: 'Your Store',
       description: `Order ID: ${orderId}`,
@@ -128,12 +131,11 @@ export default function Checkout() {
         color: '#F37254',
       },
     };
-  
+
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
 
-  
   return (
     <div className="min-h-screen bg-gray-50 py-10 font-medium font-[family-name:var(--font-montserrat-regular)] ">
       <div className="container mx-auto max-w-6xl px-4">
@@ -307,5 +309,14 @@ export default function Checkout() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Wrap CheckoutComponent with Suspense in the main export
+export default function Checkout() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <CheckoutComponent />
+    </Suspense>
   );
 }
