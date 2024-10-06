@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -33,7 +33,6 @@ const ProductData = {
 };
 
 export default function ProductPage() {
-  const [product, setProduct] = useState(ProductData);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -42,7 +41,10 @@ export default function ProductPage() {
   const [isShippingModalOpen, setIsShippingModalOpen] = useState(false); // State for Shipping Modal
 
   const router = useRouter();
+  
 
+  const product = ProductData;
+  
   const handleQuantityChange = (type: string) => {
     if (type === 'decrease' && quantity > 1) {
       setQuantity(quantity - 1);
