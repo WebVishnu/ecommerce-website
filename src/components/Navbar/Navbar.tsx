@@ -14,10 +14,8 @@ import MobileMenu from "./MobileMenu";
 import { Product } from "@/types";
 import BottomTab from "./BottomTab";
 import Link from "next/link";
-import ProductCard from "../ProductCard";
-import QuickAddModal from "../Modal/QuickAddModal";
-import QuickViewModal from "../Modal/QuickViewModal";
 import ProductData from "@/json/ProductData";
+import SearchProductCard from "../SearchProductCard";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,13 +26,9 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const searchRef = useRef<HTMLDivElement>(null); // Reference for the search container
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null); // Debounce timeout ref
 
   const products = ProductData(); 
-
-  // State for modals
-  const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);
-  const [isQuickViewModalOpen, setIsQuickViewModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // Track the selected product
 
   // Update scroll state
   useEffect(() => {
@@ -53,29 +47,32 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle search query change
+  // Handle search query change with debounce
   useEffect(() => {
-    if (searchQuery) {
-      const filtered = products.filter((product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products); // Show all if no search
+    // Clear the previous timeout if it's still running
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
     }
+
+    // Set a new timeout for the debounce
+    debounceTimeout.current = setTimeout(() => {
+      if (searchQuery) {
+        const filtered = products.filter((product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredProducts(filtered);
+      } else {
+        setFilteredProducts(products); // Show all if no search
+      }
+    }, 300); // Wait 300ms after the user stops typing
+
+    return () => {
+      // Cleanup the timeout on unmount or before next effect run
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+      }
+    };
   }, [searchQuery, products]);
-
-  // Handle Quick Add button click
-  const handleQuickAddClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsQuickAddModalOpen(true); // Open Quick Add modal
-  };
-
-  // Handle Quick View button click
-  const handleQuickViewClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsQuickViewModalOpen(true); // Open Quick View modal
-  };
 
   // Close search box on click outside
   useEffect(() => {
@@ -179,12 +176,8 @@ const Navbar = () => {
                     <div className="flex space-x-4" style={{ minWidth: "200%" }}>
                       {filteredProducts.map((product, index) => (
                         <div key={index} className="w-1/3">
-                          <ProductCard
+                          <SearchProductCard
                             product={product}
-                            handleQuickAddClick={handleQuickAddClick}
-                            handleQuickViewClick={handleQuickViewClick}
-                            isQuickViewModalOpen={false}
-                            isQuickAddModalOpen={false}
                           />
                         </div>
                       ))}
@@ -266,23 +259,6 @@ const Navbar = () => {
       {/* Bottom Navigation Bar (for mobile view) */}
       <BottomTab setSearchOpen={setSearchOpen} />
 
-      {/* Quick View Modal */}
-      {selectedProduct && (
-        <QuickViewModal
-          isOpen={isQuickViewModalOpen}
-          onClose={() => setIsQuickViewModalOpen(false)}
-          product={selectedProduct}
-        />
-      )}
-
-      {/* Quick Add Modal */}
-      {selectedProduct && (
-        <QuickAddModal
-          isOpen={isQuickAddModalOpen}
-          onClose={() => setIsQuickAddModalOpen(false)}
-          product={selectedProduct}
-        />
-      )}
     </header>
   );
 };

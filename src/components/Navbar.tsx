@@ -314,9 +314,6 @@ const Navbar = () => {
                           <div key={index} className="w-1/3">
                             <ProductCard
                               product={product}
-                              isQuickViewModalOpen={true}
-                              isQuickAddModalOpen={true}
-                              handleQuickViewClick={() => {}}
                               handleQuickAddClick={() => {}}
                             />
                           </div>
@@ -529,9 +526,6 @@ const Navbar = () => {
                 <div key={index} className="w-1/3">
                   <ProductCard
                     product={product}
-                    isQuickViewModalOpen={true}
-                    isQuickAddModalOpen={true}
-                    handleQuickViewClick={() => {}}
                     handleQuickAddClick={() => {}}
                   />
                 </div>
