@@ -41,10 +41,10 @@ export default function ProductPage() {
   const [isShippingModalOpen, setIsShippingModalOpen] = useState(false); // State for Shipping Modal
 
   const router = useRouter();
-  
+
 
   const product = ProductData;
-  
+
   const handleQuantityChange = (type: string) => {
     if (type === 'decrease' && quantity > 1) {
       setQuantity(quantity - 1);
@@ -81,7 +81,7 @@ export default function ProductPage() {
   const priceToDisplay = product.onSale && product.salePrice ? product.salePrice : product.originalPrice;
   const subtotal = (priceToDisplay * quantity).toFixed(2);
 
-  const products = ProductDataJson(); 
+  const products = ProductDataJson();
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isQuickAddModalOpen, setIsQuickAddModalOpen] = useState(false);
@@ -95,9 +95,6 @@ export default function ProductPage() {
     <>
       <div className="container mx-auto max-w-7xl py-10 px-4 lg:px-0 font-[family-name:var(--font-montserrat-regular)]">
         <Toaster position="top-center" />
-        <nav className="text-sm text-gray-500 mb-5">
-          <Link href="/">Home</Link> / <Link href="/products">Product</Link> / {product.name}
-        </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           {/* Product Image Section */}
@@ -112,15 +109,14 @@ export default function ProductPage() {
             {/* Thumbnail Gallery */}
             <div className="flex space-x-4">
               {product.images.map((url, index) => (
-                <button key={index} onClick={() => setCurrentImage(index)} className="focus:outline-none">
+                <button key={index} onClick={() => setCurrentImage(index)} className="focus:outline-none">.
                   <Image
                     src={url}
                     alt={`Thumbnail ${index + 1}`}
                     width={80}
                     height={80}
-                    className={`rounded-lg border-2 object-cover h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 ${
-                      index === currentImage ? 'border-yellow-500' : 'border-gray-300'
-                    }`}
+                    className={`rounded-lg border-2 object-cover h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 ${index === currentImage ? 'border-yellow-500' : 'border-gray-300'
+                      }`}
                   />
                 </button>
               ))}
@@ -147,9 +143,8 @@ export default function ProductPage() {
                     <button
                       key={variant}
                       onClick={() => handleVariantClick(variant)}
-                      className={`px-4 py-2 transition duration-300 ${
-                        selectedVariant === variant ? 'bg-my-blue text-white' : 'bg-gray-100 hover:bg-gray-200'
-                      }`}
+                      className={`px-4 py-2 transition duration-300 ${selectedVariant === variant ? 'bg-my-blue text-white' : 'bg-gray-100 hover:bg-gray-200'
+                        }`}
                     >
                       {variant}
                     </button>
@@ -169,13 +164,13 @@ export default function ProductPage() {
               )}
             </div>
 
-            {product.stock !== undefined && (
+            {/* {product.stock !== undefined && (
               <div className="mb-6 text-red-500 text-sm font-semibold">
                 <p className="flex items-center">
                   <span className="mr-2">🔥</span> Only {product.stock} left in stock
                 </p>
               </div>
-            )}
+            )} */}
 
             {/* Shipping Button with Modal */}
             <div className="mb-4" onClick={handleShippingClick}>
@@ -235,9 +230,8 @@ export default function ProductPage() {
 
               <div className="flex justify-start items-center">
                 <button
-                  className={`${
-                    isLiked ? 'bg-blue-100' : 'bg-white'
-                  } text-gray-500 border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
+                  className={`${isLiked ? 'bg-blue-100' : 'bg-white'
+                    } text-gray-500 border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
                   onClick={handleLikeButtonClick}
                 >
                   <FiHeart size={20} />
