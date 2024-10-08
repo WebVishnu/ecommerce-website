@@ -1,4 +1,11 @@
 // types/razorpay.d.ts
+
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
 interface RazorpayOptions {
   key: string;
   amount: number;
@@ -6,7 +13,7 @@ interface RazorpayOptions {
   name: string;
   description: string;
   order_id: string;
-  handler: (response: any) => void;
+  handler: (response: RazorpayResponse) => void; // Use specific response type
   prefill: {
     name: string;
     email: string;
@@ -18,5 +25,8 @@ interface RazorpayOptions {
 }
 
 interface Window {
-  Razorpay: any;
+  Razorpay: new (options: RazorpayOptions) => {
+    open: () => void; // Razorpay object has an open method
+  };
 }
+  

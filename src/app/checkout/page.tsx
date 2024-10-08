@@ -1,17 +1,48 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 
+// Define RazorpayResponse Type
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
+// Define RazorpayOptions Type
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  theme: {
+    color: string;
+  };
+}
+
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: new (options: RazorpayOptions) => {
+      open: () => void;
+    };
   }
 }
 
-export default function Checkout() {
+// Define a fallback component for loading state
+const Loading = () => <div>Loading...</div>;
+
+function CheckoutComponent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const name = searchParams.get('name');
@@ -50,7 +81,7 @@ export default function Checkout() {
     return `ORDER-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   };
 
-  const [orderId] = useState(generateOrderId()); 
+  const [orderId] = useState(generateOrderId());
 
   const handleQuantityChange = (type: string) => {
     if (type === 'decrease' && quantity > 1) {
@@ -74,38 +105,37 @@ export default function Checkout() {
     document.body.appendChild(script);
   }, []);
 
-  // Razorpay Payment Integration
   const handleRazorpayPayment = async () => {
     if (!isRazorpayReady) {
       alert('Razorpay SDK is still loading. Please wait...');
       return;
     }
 
-    const options = {
-      key: 'rzp_test_EkdZaedpnLu4rz', 
-      amount: Number(totalPrice) * 100, 
+    const options: RazorpayOptions = {
+      key: 'rzp_test_EkdZaedpnLu4rz',
+      amount: Number(totalPrice) * 100,
       currency: 'INR',
-      name: 'Vitco',
-      description: `Order ID: ${orderId}`, 
-      image: '/logo.jpeg',
-      order_id: "",
-      handler: function (response: any) {
+      name: 'Your Store',
+      description: `Order ID: ${orderId}`,
+      order_id: '', // Include the generated order ID here
+      handler: function (response: RazorpayResponse) {
         alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-        alert(`Order ID: ${orderId}`); 
+        alert(`Order ID: ${orderId}`);
       },
       prefill: {
-        name: 'Vishnu',
-        email: 'vishnu@gmail.com',
+        name: 'Your Name',
+        email: 'your-email@example.com',
         contact: '9999999999',
       },
       theme: {
-        color: '#386fa4',
+        color: '#F37254',
       },
     };
 
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+
   return (
     <div className="min-h-screen bg-gray-50 py-10 font-medium font-[family-name:var(--font-montserrat-regular)] ">
       <div className="container mx-auto max-w-6xl px-4">
@@ -279,5 +309,14 @@ export default function Checkout() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Wrap CheckoutComponent with Suspense in the main export
+export default function Checkout() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <CheckoutComponent />
+    </Suspense>
   );
 }

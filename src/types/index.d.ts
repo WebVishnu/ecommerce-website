@@ -1,4 +1,5 @@
 export interface Product {
+  id: number;
   images: string[]; // Array of images
   name: string;
   originalPrice: string | number;

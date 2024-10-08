@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-100 text-gray-800 py-8 md:py-12 mt-12">
+    <footer className="bg-gray-100 text-gray-800 py-8 md:py-12 mt-12 font-[family-name:var(--font-montserrat-regular)]">
       <div className="container mx-auto max-w-[1200px] md:px-12 px-5">
         {/* Accordion for mobile */}
         <div className="md:hidden">
