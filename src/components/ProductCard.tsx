@@ -31,7 +31,7 @@ const router = useRouter();
   };
 
   return (
-    <div className="relative border-2 rounded-lg p-4 sm:p-6 transition-transform duration-700 overflow-hidden group" onClick={handleProductClick}
+    <div className="relative border-2 rounded-lg p-4 sm:p-6 transition-transform duration-700 overflow-hidden group" 
 >
       {/* Sale Badge */}
       {onSale && (
@@ -64,12 +64,12 @@ const router = useRouter();
       </div>
 
       {/* Product Name */}
-      <h3 className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer hover:font-bold font-medium transition-colors duration-300 hover:text-my-blue text-center break-words">
+      <h3 onClick={handleProductClick} className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer hover:font-bold font-medium transition-colors duration-300 hover:text-my-blue text-center break-words">
         {name}
       </h3>
 
       {/* Pricing */}
-      <div className="flex items-center justify-center mt-2 text-xs sm:text-sm md:text-base">
+      <div onClick={handleProductClick} className="flex items-center justify-center mt-2 text-xs sm:text-sm md:text-base">
         {salePrice ? (
           <>
             <span className="text-gray-500 line-through mr-2">₹{originalPrice}</span>
@@ -81,7 +81,7 @@ const router = useRouter();
       </div>
 
       {/* Quick Add Button and Heart Button */}
-      <div className="flex flex-row w-full mt-4 items-center justify-between">
+      <div  className="flex flex-row w-full mt-4 items-center justify-between">
         {/* Pass product data as query parameters, including the first image */}
         <Link
           href={{

@@ -1,7 +1,10 @@
 import { Product } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter for navigation
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { toast } from 'sonner'; // Import toast for notifications
 
 interface QuickAddModalProps {
   isOpen: boolean;
@@ -12,6 +15,8 @@ interface QuickAddModalProps {
 const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product }) => {
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Track the current image index
+  const [addedToCart, setAddedToCart] = useState(false); // State to check if the product is added to cart
+  const router = useRouter(); // Initialize the router for navigation
 
   // Disable background scroll when modal is open
   useEffect(() => {
@@ -42,6 +47,20 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product 
     setCurrentImageIndex((prevIndex) => (prevIndex === product.images.length - 1 ? 0 : prevIndex + 1));
   };
 
+  // Handle Add to Cart click
+  const handleAddToCart = () => {
+    // Show a toast notification
+    toast.success('Added to cart successfully!');
+    // Update button to say "Go to Cart"
+    setAddedToCart(true);
+  };
+
+  // Handle View Full Details click
+  const handleViewFullDetails = () => {
+    router.push(`/products/${product.id}`); // Navigate to the dynamic product page
+    onClose(); // Close the modal
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[9999]">
       {/* Modal Overlay: Click to close */}
@@ -63,6 +82,8 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product 
               <Image
                 src={product.images[currentImageIndex]} // Display the current image based on index
                 alt={product.name}
+                width={1000}
+                height={1000}
                 className="rounded-lg w-full h-48 sm:h-64 md:h-72 object-cover"
               />
             </div>
@@ -130,11 +151,28 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose, product 
             </p>
 
             <div className="flex md:flex-col gap-y-3 flex-row items-center gap-x-4">
-              {/* Add To Cart Button */}
-              <button className="bg-my-blue text-white w-full py-2 sm:py-3 rounded-full">Add To Cart</button>
+              {/* Add To Cart / Go to Cart Button */}
+              {addedToCart ? (
+                <button
+                  onClick={() => router.push('/cart')} // Navigate to cart when clicked
+                  className="bg-green-500 text-white w-full py-2 sm:py-3 rounded-full"
+                >
+                  Go To Cart
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-my-blue text-white w-full py-2 sm:py-3 rounded-full"
+                >
+                  Add To Cart
+                </button>
+              )}
 
               {/* View Full Details Button */}
-              <button className="bg-white text-my-blue w-full py-2 sm:py-3 rounded-full border border-my-blue">
+              <button
+                onClick={handleViewFullDetails}
+                className="bg-white text-my-blue w-full py-2 sm:py-3 rounded-full border border-my-blue"
+              >
                 View Full Details
               </button>
             </div>

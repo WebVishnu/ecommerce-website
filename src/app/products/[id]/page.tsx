@@ -42,7 +42,6 @@ export default function ProductPage() {
 
   const router = useRouter();
 
-
   const product = ProductData;
 
   const handleQuantityChange = (type: string) => {
@@ -99,24 +98,27 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           {/* Product Image Section */}
           <div className="flex flex-col justify-center items-center">
-            <Image
-              src={product.images[currentImage]}
-              alt={product.name}
-              width={500}
-              height={500}
-              className="rounded-lg mb-4 h-[300px] md:h-[400px] lg:h-[500px] w-full object-cover"
-            />
+            <a href={product.images[currentImage]} target="_blank" rel="noopener noreferrer" className="rounded-lg mb-4 h-[300px] md:h-[400px] lg:h-[500px] w-full ">
+              <Image
+                src={product.images[currentImage]}
+                alt={product.name}
+                width={500}
+                height={500}
+                className="rounded-lg mb-4 h-[300px] md:h-[400px] lg:h-[500px] w-full object-cover cursor-pointer"
+              />
+            </a>
             {/* Thumbnail Gallery */}
             <div className="flex space-x-4">
               {product.images.map((url, index) => (
-                <button key={index} onClick={() => setCurrentImage(index)} className="focus:outline-none">.
+                <button key={index} onClick={() => setCurrentImage(index)} className="focus:outline-none">
                   <Image
                     src={url}
                     alt={`Thumbnail ${index + 1}`}
                     width={80}
                     height={80}
-                    className={`rounded-lg border-2 object-cover h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 ${index === currentImage ? 'border-yellow-500' : 'border-gray-300'
-                      }`}
+                    className={`rounded-lg border-2 object-cover h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 ${
+                      index === currentImage ? 'border-yellow-500' : 'border-gray-300'
+                    }`}
                   />
                 </button>
               ))}
@@ -143,8 +145,9 @@ export default function ProductPage() {
                     <button
                       key={variant}
                       onClick={() => handleVariantClick(variant)}
-                      className={`px-4 py-2 transition duration-300 ${selectedVariant === variant ? 'bg-my-blue text-white' : 'bg-gray-100 hover:bg-gray-200'
-                        }`}
+                      className={`px-4 py-2 transition duration-300 ${
+                        selectedVariant === variant ? 'bg-my-blue text-white' : 'bg-gray-100 hover:bg-gray-200'
+                      }`}
                     >
                       {variant}
                     </button>
@@ -163,14 +166,6 @@ export default function ProductPage() {
                 <span className="text-3xl lg:text-4xl font-bold text-gray-900">₹{product.originalPrice.toFixed(2)}</span>
               )}
             </div>
-
-            {/* {product.stock !== undefined && (
-              <div className="mb-6 text-red-500 text-sm font-semibold">
-                <p className="flex items-center">
-                  <span className="mr-2">🔥</span> Only {product.stock} left in stock
-                </p>
-              </div>
-            )} */}
 
             {/* Shipping Button with Modal */}
             <div className="mb-4" onClick={handleShippingClick}>
@@ -230,8 +225,7 @@ export default function ProductPage() {
 
               <div className="flex justify-start items-center">
                 <button
-                  className={`${isLiked ? 'bg-blue-100' : 'bg-white'
-                    } text-gray-500 border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
+                  className={`${isLiked ? 'bg-blue-100' : 'bg-white'} text-gray-500 border border-gray-300 rounded-full p-2 shadow transition-colors duration-300`}
                   onClick={handleLikeButtonClick}
                 >
                   <FiHeart size={20} />
@@ -273,6 +267,7 @@ export default function ProductPage() {
           </div>
         </div>
 
+        {/* Related Products */}
         <h1 className="text-2xl font-semibold mt-10 mb-4">Related Products</h1>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.slice(0, 4).map((product, index) => (
@@ -302,7 +297,7 @@ export default function ProductPage() {
                 We can ship to virtually any address in the world. Note that some restrictions apply, and some products cannot be shipped to international destinations.
               </p>
               <button
-                className="text-white p-2 absolute top-0 right-0 bg-black  transition-colors"
+                className="text-white p-2 absolute top-0 right-0 bg-black transition-colors"
                 onClick={handleModalClose}
               >
                 <FiX size={24} />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { Toaster } from "sonner";
 
 // Import Montserrat fonts with different weights
 const montserratBlack = localFont({
@@ -79,6 +80,7 @@ export default function RootLayout({
         `}
       >
         {/* Navbar Component */}
+        <Toaster/>
         <Navbar />
         <div className="mt-28">
           {children}
