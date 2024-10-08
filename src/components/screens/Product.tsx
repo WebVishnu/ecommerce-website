@@ -61,7 +61,7 @@ export default function Product() {
           {loadingMore ? (
             <div className="flex items-center space-x-2">
               <svg
-                className="animate-spin h-5 w-5 text-my-blue"
+                className="animate-spin h-5 w-5 text-primary"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -80,12 +80,12 @@ export default function Product() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                 ></path>
               </svg>
-              <span className="text-sm text-my-blue">Loading...</span>
+              <span className="text-sm text-primary">Loading...</span>
             </div>
           ) : (
             <button
               onClick={handleSeeMoreClick}
-              className="bg-my-blue text-white px-6 py-3 rounded-lg hover:bg-my-blue/80 text-xs font-medium transition-colors duration-300"
+              className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/80 text-xs font-medium transition-colors duration-300"
             >
               See More
             </button>

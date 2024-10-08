@@ -11,7 +11,6 @@ export default function PhoneLoginPage() {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading spinner state
 
-  console.log(otp)
   const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true); // Start spinner when sending OTP
@@ -32,7 +31,7 @@ export default function PhoneLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-my-blue to-my-blue/50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary to-primary/50">
       {/* Form Container */}
       <div className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md animate-fade-in">
         <Toaster position="top-right" />
@@ -66,7 +65,7 @@ export default function PhoneLoginPage() {
             </div>
             <button
               type="submit"
-              className="w-full py-3 bg-my-blue text-white rounded-lg hover:bg-my-blue/80 transition duration-300 flex justify-center items-center space-x-2 font-[family-name:var(--font-montserrat-bold)]"
+              className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition duration-300 flex justify-center items-center space-x-2 font-[family-name:var(--font-montserrat-bold)]"
             >
               {isLoading ? <FaSpinner className="animate-spin" /> : 'Send OTP'}
             </button>
@@ -94,7 +93,7 @@ export default function PhoneLoginPage() {
             </InputOTP>
             <button
               type="submit"
-              className="w-full py-3 bg-my-blue text-white rounded-lg hover:bg-my-blue/70 transition duration-300 flex justify-center items-center space-x-2 font-[family-name:var(--font-montserrat-bold)]"
+              className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/70 transition duration-300 flex justify-center items-center space-x-2 font-[family-name:var(--font-montserrat-bold)]"
             >
               {isLoading ? <FaSpinner className="animate-spin" /> : 'Verify OTP'}
             </button>
@@ -109,7 +108,7 @@ export default function PhoneLoginPage() {
                 setIsOtpSent(false);
                 toast("Resending OTP..."); // Show toast when resending OTP
               }}
-              className="text-sm text-my-blue hover:underline transition duration-300 font-[family-name:var(--font-montserrat-regular)]"
+              className="text-sm text-primary hover:underline transition duration-300 font-[family-name:var(--font-montserrat-regular)]"
             >
               Didn’t receive OTP? Resend
             </button>

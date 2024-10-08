@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState, Suspense } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useEffect, useState, Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Country, State, City } from "country-state-city";
 
 // Define RazorpayResponse Type
 interface RazorpayResponse {
@@ -31,6 +32,16 @@ interface RazorpayOptions {
   };
 }
 
+interface CheckoutData {
+  shipping: {
+    address: string;
+    country: string;
+    state: null | string;
+    city: null | string;
+    pin: null | string;
+  };
+}
+
 declare global {
   interface Window {
     Razorpay: new (options: RazorpayOptions) => {
@@ -45,31 +56,38 @@ const Loading = () => <div>Loading...</div>;
 function CheckoutComponent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const name = searchParams.get('name');
-  const originalPrice = searchParams.get('originalPrice');
-  const salePrice = searchParams.get('salePrice');
-  const initialQuantity = searchParams.get('quantity');
-  const imageUrl = searchParams.get('imageUrl'); 
+  const name = searchParams.get("name");
+  const originalPrice = searchParams.get("originalPrice");
+  const salePrice = searchParams.get("salePrice");
+  const initialQuantity = searchParams.get("quantity");
+  const imageUrl = searchParams.get("imageUrl");
+  const [checkoutData, setCheckoutData] = useState<CheckoutData>({
+    shipping: {
+      address: "",
+      country: "India",
+      state: null,
+      city: null,
+      pin: null,
+    },
+  });
 
   const [quantity, setQuantity] = useState(Number(initialQuantity) || 1);
   const [isRazorpayReady, setIsRazorpayReady] = useState(false);
-
   useEffect(() => {
     if (!name || !originalPrice) {
-      router.replace('/');
+      router.replace("/");
     }
   }, [name, originalPrice, router]);
 
   const [address, setAddress] = useState({
-    fullName: '',
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    pinCode: '',
-    country: '',
-    phoneNumber: '',
+    fullName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    pinCode: "",
+    country: "",
+    phoneNumber: "",
   });
-
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress({
       ...address,
@@ -84,9 +102,9 @@ function CheckoutComponent() {
   const [orderId] = useState(generateOrderId());
 
   const handleQuantityChange = (type: string) => {
-    if (type === 'decrease' && quantity > 1) {
+    if (type === "decrease" && quantity > 1) {
       setQuantity(quantity - 1);
-    } else if (type === 'increase') {
+    } else if (type === "increase") {
       setQuantity(quantity + 1);
     }
   };
@@ -94,41 +112,43 @@ function CheckoutComponent() {
   const totalPrice = (Number(salePrice || originalPrice) * quantity).toFixed(2);
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.onload = () => {
       setIsRazorpayReady(true); // Set state when Razorpay is ready
     };
     script.onerror = () => {
-      console.error('Failed to load Razorpay SDK');
+      console.error("Failed to load Razorpay SDK");
     };
     document.body.appendChild(script);
   }, []);
 
   const handleRazorpayPayment = async () => {
     if (!isRazorpayReady) {
-      alert('Razorpay SDK is still loading. Please wait...');
+      alert("Razorpay SDK is still loading. Please wait...");
       return;
     }
 
     const options: RazorpayOptions = {
-      key: 'rzp_test_EkdZaedpnLu4rz',
+      key: "rzp_test_EkdZaedpnLu4rz",
       amount: Number(totalPrice) * 100,
-      currency: 'INR',
-      name: 'Your Store',
+      currency: "INR",
+      name: "Your Store",
       description: `Order ID: ${orderId}`,
-      order_id: '', // Include the generated order ID here
+      order_id: "", // Include the generated order ID here
       handler: function (response: RazorpayResponse) {
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+        alert(
+          `Payment successful! Payment ID: ${response.razorpay_payment_id}`
+        );
         alert(`Order ID: ${orderId}`);
       },
       prefill: {
-        name: 'Your Name',
-        email: 'your-email@example.com',
-        contact: '9999999999',
+        name: "Your Name",
+        email: "your-email@example.com",
+        contact: "9999999999",
       },
       theme: {
-        color: '#F37254',
+        color: "#F37254",
       },
     };
 
@@ -137,175 +157,157 @@ function CheckoutComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 font-medium font-[family-name:var(--font-montserrat-regular)] ">
-      <div className="container mx-auto max-w-6xl px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Product Section */}
-          <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-6 text-gray-800">Your Cart</h2>
-
-            <div className="flex flex-col md:flex-row items-start border-b pb-6 mb-6">
-              {/* Product Image */}
-              <div className="w-full md:w-1/3 flex justify-center mb-4 md:mb-0">
-                <Image
-                  src={imageUrl || '/fallback-image.png'}
-                  alt="Product"
-                  width={200}
-                  height={200}
-                  className="rounded-md object-cover h-32 w-32"
-                />
-              </div>
-
-              {/* Product Details */}
-              <div className="w-full md:w-2/3 pl-0 md:pl-6">
-                <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
-                <p className="text-sm text-gray-500 mt-1 mb-4">Product Description / Black</p>
-
-                {/* Price and Quantity */}
-                <div className="flex items-center space-x-4">
-                  <span className="text-xl font-bold text-gray-800">
-                    ₹{salePrice || originalPrice}
-                  </span>
-                  <div className="flex items-center border rounded-md overflow-hidden">
-                    <button
-                      onClick={() => handleQuantityChange('decrease')}
-                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200"
-                    >
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      value={quantity}
-                      readOnly
-                      className="w-12 text-center border-t border-b py-2"
-                    />
-                    <button
-                      onClick={() => handleQuantityChange('increase')}
-                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <span className="ml-4 text-xl font-bold text-gray-800">
-                    ₹{totalPrice}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Address Section */}
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">Shipping Address</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                  value={address.fullName}
-                  onChange={handleAddressChange}
-                  className="w-full border p-3 rounded-md focus:outline-none"
-                />
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  placeholder="Phone Number"
-                  value={address.phoneNumber}
-                  onChange={handleAddressChange}
-                  className="w-full border p-3 rounded-md focus:outline-none"
-                />
-                <input
-                  type="text"
-                  name="addressLine1"
-                  placeholder="Address Line 1"
-                  value={address.addressLine1}
-                  onChange={handleAddressChange}
-                  className="w-full border p-3 rounded-md focus:outline-none"
-                />
-                <input
-                  type="text"
-                  name="addressLine2"
-                  placeholder="Address Line 2"
-                  value={address.addressLine2}
-                  onChange={handleAddressChange}
-                  className="w-full border p-3 rounded-md focus:outline-none"
-                />
-                 <select className="w-full border p-3 rounded-md mb-3 focus:outline-none focus:ring focus:border-blue-300">
-                <option>India</option>
-                <option>United States</option>
-                <option>Canada</option>
-              </select>
-                <input
-                  type="text"
-                  name="pinCode"
-                  placeholder="Pin Code"
-                  value={address.pinCode}
-                  onChange={handleAddressChange}
-                  className="w-full border p-3 rounded-md focus:outline-none"
-                />
-                <select className="w-full border p-3 rounded-md mb-3 focus:outline-none focus:ring focus:border-blue-300">
-                <option>California</option>
-                <option>New York</option>
-                <option>Mumbai</option>
-              </select>
-              </div>
-            </div>
+    <div className="grid grid-cols-5 gap-6 max-w-[1200px] mx-auto px-6 pt-12">
+      <div className="sm:col-span-3 col-span-5">
+        <h1 className="font-bold">Your Information</h1>
+        <div className="grid grid-cols-2 gap-5 mt-5">
+          <div className="flex flex-col">
+            <span className="text-sm">Name</span>
+            <input
+              type="text"
+              placeholder="full name"
+              className="border-2 py-2 px-4"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-sm">Mobile number</span>
+            <input
+              type="text"
+              placeholder="number"
+              className=" border-2 py-2 px-4"
+            />
+          </div>
+        </div>
+        <p className="text-xs mt-3">
+          By providing your mobile, you agree to receive marketing
+          communications from Vitco. <br /> For more about how we use your
+          information, see our Privacy Policy.
+        </p>
+        <h1 className="font-bold mt-5">Shipping Address</h1>
+        <div>
+          <select
+            name="country"
+            id="country"
+            className="border-2 py-2 px-4 w-full mt-5"
+            disabled
+          >
+            <option value="india">India</option>
+          </select>
+          <div className="flex flex-col mt-3">
+            <input
+              type="text"
+              placeholder="street address*"
+              className=" border-2 py-2 px-4"
+            />
           </div>
 
-          {/* Order Summary Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md lg:sticky top-10">
-            <h2 className="text-lg font-semibold mb-6 text-gray-800">Order Summary</h2>
-
-            <div className="flex justify-between mb-4">
-              <span className="text-sm font-semibold text-gray-600">Subtotal</span>
-              <span className="text-sm font-bold text-gray-800">₹{totalPrice}</span>
+          <div className="grid grid-cols-3 gap-5">
+            <div className="flex flex-col mt-3">
+              <select
+                name="state"
+                id="state"
+                className="border-2 py-2 px-4"
+                onChange={(e) => {
+                  if (e.target.value != "null")
+                    setCheckoutData({
+                      ...checkoutData,
+                      shipping: {
+                        ...checkoutData.shipping,
+                        state: e.target.value,
+                      },
+                    });
+                }}
+              >
+                <option value="null">Select State</option>
+                {State.getStatesOfCountry("IN").map((state, index) => (
+                  <option key={index} value={state.isoCode}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
             </div>
-
-           
-
-            <button className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md mb-6 hover:bg-blue-700 transition duration-300">
-              Calculate Shipping
-            </button>
-
-            {/* Coupon Code Section */}
-            <div className="mb-6">
-              <label className="block text-sm font-semibold mb-2 text-gray-700">Coupon Code</label>
+            <div className="flex flex-col mt-3">
+              <select
+                name="city"
+                id="city"
+                className="border-2 py-2 px-4"
+                onChange={(e) => {
+                  if (e.target.value != "null")
+                    setCheckoutData({
+                      ...checkoutData,
+                      shipping: {
+                        ...checkoutData.shipping,
+                        city: e.target.value,
+                      },
+                    });
+                }}
+              >
+                <option value="null">Select city</option>
+                {City.getCitiesOfState(
+                  "IN",
+                  String(checkoutData.shipping.state ?? "")
+                ).map((city,index) => (
+                  <option key={index} value={city.name}>{city.name}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col mt-3">
               <input
-                type="text"
-                className="w-full border p-3 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                placeholder="Enter Coupon Code"
+                type="number"
+                placeholder="pin code*"
+                className=" border-2 py-2 px-4"
               />
             </div>
+          </div>
+        </div>
+        <div className="flex justify-end w-full mt-5">
+          <button
+            className="py-2 px-5 bg-primary rounded-full text-white"
+            onClick={handleRazorpayPayment}
+          >
+            Make Payment
+          </button>
+        </div>
+      </div>
 
-            {/* Total */}
-            <div className="flex justify-between mb-6">
-              <span className="text-sm font-bold text-gray-800">TOTAL:</span>
-              <span className="text-sm font-bold text-gray-800">₹{totalPrice}</span>
-            </div>
-
-            {/* Terms and Conditions */}
-            <div className="flex items-center mb-6">
-              <input type="checkbox" className="mr-2" />
-              <label className="text-sm text-gray-700">
-                I agree with{" "}
-                <Link href="/terms" className="text-blue-500">
-                  Terms & Conditions
-                </Link>
-              </label>
-            </div>
-
-            {/* Proceed to Checkout Button */}
-            <button
-              onClick={handleRazorpayPayment}
-              className="w-full bg-yellow-500 text-white font-semibold py-3 rounded-md hover:bg-yellow-600 transition duration-300"
-            >
-              Proceed to Checkout
-            </button>
-
-            {/* Display Order ID */}
-            <div className="mt-4">
-              <p className="text-sm text-gray-600">Order ID: <strong>{orderId}</strong></p>
+      <div className="bg-gray-100 sm:col-span-2 col-span-5 px-6 py-3">
+        <h1 className="font-bold flex justify-between">
+          <span>Cart summary</span>
+          <span>₹14,485.00</span>
+        </h1>
+        <div className="mt-5">
+          <div className="flex gap-5 border-b-2  py-3">
+            <Image
+              src={imageUrl || "/fallback-image.png"}
+              alt="Product"
+              width={200}
+              height={200}
+              className="rounded-md object-cover h-16 w-16"
+            />
+            <div className="flex flex-col">
+              <p className="">V-BOND MILK ANALYZER</p>
+              <p className="text-sm">Qty : 5</p>
+              <p>₹ 55000</p>
             </div>
           </div>
+        </div>
+        <div className="mt-2">
+          <h1 className="flex justify-between">
+            <span>Sub total: (1)</span>
+            <span>₹14,485.00</span>
+          </h1>
+          <h1 className="flex justify-between">
+            <span>Setup charges:</span>
+            <span>₹2000.00</span>
+          </h1>
+          <h1 className="flex justify-between border-b-2 pb-3">
+            <span>Est. delivery:</span>
+            <span>2 days</span>
+          </h1>
+          <h1 className="flex justify-between mt-5">
+            <span>Order Total:</span>
+            <span>₹16,485.00</span>
+          </h1>
         </div>
       </div>
     </div>

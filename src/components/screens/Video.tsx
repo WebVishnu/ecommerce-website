@@ -4,7 +4,7 @@ function VideoPlayer() {
   return (
     <div className="w-full relative border-2 border-gray-200 rounded-lg shadow-lg mx-auto mt-8">
       <video
-        className="w-full h-auto"
+        className="w-full max-h-[800px]"
         controls
         poster="/vitco_video.png"  // Thumbnail image before play
       >

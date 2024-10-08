@@ -37,7 +37,7 @@ function BottomTab({
 
       <Link href="/cart" className="flex flex-col items-center relative">
         <FiShoppingCart size={24} />
-        <div className="absolute -top-2 -right-3 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+        <div className="absolute -top-2 -right-3 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
           0
         </div>
         <span className="text-xs">Cart</span>

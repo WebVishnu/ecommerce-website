@@ -2,15 +2,10 @@
 
 import Product from "@/components/screens/Product";
 import Hero from "@/components/screens/Hero";
-import Footer from "@/components/Footer";
 import VideoPlayer from "@/components/screens/Video";
 import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar/Navbar";
-import { Metadata } from "next";
-
-
 
 export default function Page() {
   return (
@@ -32,7 +27,7 @@ export default function Page() {
         <Product />
       </div>
 
-      <Footer />
+      
       <Link
         href={"https://wa.me/919917673301"}
         target="_blank"

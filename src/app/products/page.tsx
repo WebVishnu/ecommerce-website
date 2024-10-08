@@ -47,7 +47,7 @@ export default function Product() {
         <div className="flex justify-center mt-8">
           <button
             onClick={handleSeeMoreClick}
-            className="bg-my-blue text-white px-6 py-3 rounded-lg hover:bg-my-blue/80 text-xs font-medium transition-colors duration-300"
+            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/80 text-xs font-medium transition-colors duration-300"
           >
             See More
           </button>

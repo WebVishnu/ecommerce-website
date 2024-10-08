@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/navigation";
 import ProductCard from "./ProductCard";
 import { Product } from "@/types";
+import ProductData from "@/json/ProductData";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,107 +68,108 @@ const Navbar = () => {
     router.push("/wishlists");
   };
 
-  const products = [
-    {
-      images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: true,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p2.jpg", "/products/p3.jpg", "/products/p4.jpg"], // Array of product images
-      name: "Product - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: false,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p5.jpeg", "/products/p1.png", "/products/p2.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: false,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: true,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: false,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p5.jpeg", "/products/p1.png", "/products/p2.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: false,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: true,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-    {
-      images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
-      name: "Sample - Computers & Accessories",
-      originalPrice: 99.0,
-      salePrice: 49.0,
-      onSale: false,
-      stock: 5, // Number of items left
-      vendor: "Ella - Halothemes",
-      availability: "In Stock",
-      type: "Electronics",
-      customersViewing: 283, // Example customer count
-    },
-  ];
+  // const products = [
+  //   {
+  //     images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: true,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p2.jpg", "/products/p3.jpg", "/products/p4.jpg"], // Array of product images
+  //     name: "Product - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: false,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p5.jpeg", "/products/p1.png", "/products/p2.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: false,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: true,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: false,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p5.jpeg", "/products/p1.png", "/products/p2.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: false,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: true,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  //   {
+  //     images: ["/products/p1.png", "/products/p2.jpg", "/products/p3.jpg"], // Array of product images
+  //     name: "Sample - Computers & Accessories",
+  //     originalPrice: 99.0,
+  //     salePrice: 49.0,
+  //     onSale: false,
+  //     stock: 5, // Number of items left
+  //     vendor: "Ella - Halothemes",
+  //     availability: "In Stock",
+  //     type: "Electronics",
+  //     customersViewing: 283, // Example customer count
+  //   },
+  // ];
 
   // Effect to filter products when searchQuery changes
   useEffect(() => {
+    const products = ProductData();
     if (searchQuery) {
       const filtered = products.filter((product) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -188,7 +190,7 @@ const Navbar = () => {
         style={{ transition: "all 0.5s ease" }}
       >
         {/* Top Announcement Bar */}
-        <div className="bg-blue-100 py-2 overflow-hidden relative">
+        {/* <div className="bg-blue-100 py-2 overflow-hidden relative">
           <div className="flex items-center justify-start space-x-10 animate-marquee">
             <div className="marquee-content">
               <span className="text-blue-500 text-xs lg:text-sm">
@@ -202,7 +204,7 @@ const Navbar = () => {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Navigation Bar */}
         <div className="bg-white py-3">
@@ -217,7 +219,7 @@ const Navbar = () => {
                 <button
                   title="search"
                   onClick={() => setSearchOpen(true)}
-                  className="text-my-blue"
+                  className="text-primary"
                 >
                   <FiSearch size={24} />
                 </button>
@@ -231,7 +233,7 @@ const Navbar = () => {
               />
 
               <div className="flex flex-row gap-x-4 md:gap-x-6">
-                <div className="text-my-blue text-sm">
+                <div className="text-primary text-sm">
                   <FiUser size={24} />
                 </div>
                 <Link
@@ -239,7 +241,7 @@ const Navbar = () => {
                   className="flex flex-col items-center relative"
                 >
                   <FiShoppingCart size={24} />
-                  <div className="absolute -top-3 -right-2 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <div className="absolute -top-3 -right-2 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                     0
                   </div>
                 </Link>
@@ -255,10 +257,10 @@ const Navbar = () => {
                 className="w-[50%] h-20 object-contain"
               />
               <div className="hidden lg:flex flex-col">
-                <span className="text-my-blue lg:text-sm text-xs">
+                <span className="text-primary lg:text-sm text-xs">
                   Available&nbsp;24/7&nbsp;at
                 </span>
-                <span className="text-my-blue font-bold lg:text-sm text-xs">
+                <span className="text-primary font-bold lg:text-sm text-xs">
                   +91&nbsp;9917673301
                 </span>
               </div>
@@ -277,7 +279,7 @@ const Navbar = () => {
               <button
                 title="Search"
                 onClick={() => setSearchOpen1(true)} // Trigger search overlay
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-my-blue"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary"
               >
                 <FiSearch size={20} />
               </button>
@@ -326,7 +328,7 @@ const Navbar = () => {
             </div>
 
             {/* Right Section - Icons */}
-            <div className="hidden lg:flex w-[15%] mr-4 justify-between items-center space-x-6 text-my-blue text-xs">
+            <div className="hidden lg:flex w-[15%] mr-4 justify-between items-center space-x-6 text-primary text-xs">
               <Link href="/wishlists" className="flex flex-col items-center">
                 <FiHeart size={20} />
                 <span className="hover:font-bold">Wish&nbsp;Lists</span>
@@ -342,7 +344,7 @@ const Navbar = () => {
               >
                 <FiShoppingCart size={20} />
                 <span className="hover:font-bold">Cart</span>
-                <div className="absolute -top-3 -right-2 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <div className="absolute -top-3 -right-2 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                   0
                 </div>
               </Link>
@@ -490,7 +492,7 @@ const Navbar = () => {
             />
             <button
               onClick={handleSearch}
-              className="px-4 py-2 text-my-blue"
+              className="px-4 py-2 text-primary"
               title="Search"
             >
               <FiSearch size={20} />
@@ -562,7 +564,7 @@ const Navbar = () => {
 
           <Link href="/cart" className="flex flex-col items-center relative">
             <FiShoppingCart size={24} />
-            <div className="absolute -top-2 -right-3 bg-my-blue text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            <div className="absolute -top-2 -right-3 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
               0
             </div>
             <span className="text-xs">Cart</span>

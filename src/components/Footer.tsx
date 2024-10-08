@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -52,7 +53,7 @@ export default function Footer() {
                   <li key={item}>
                     <Link
                       href="#"
-                      className="hover:text-my-blue transition duration-300"
+                      className="hover:text-primary transition duration-300"
                     >
                       {item}
                     </Link>
@@ -91,7 +92,7 @@ export default function Footer() {
                   <li key={item}>
                     <Link
                       href="#"
-                      className="hover:text-my-blue transition duration-300"
+                      className="hover:text-primary transition duration-300"
                     >
                       {item}
                     </Link>
@@ -119,7 +120,7 @@ export default function Footer() {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Shop Column */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-my-blue">SHOP</h3>
+            <h3 className="font-bold text-lg mb-4 text-primary">SHOP</h3>
             <ul className="space-y-2">
               {[
                 "Milk Analyzer",
@@ -136,7 +137,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     href="#"
-                    className="hover:text-my-blue transition duration-300"
+                    className="hover:text-primary transition duration-300"
                   >
                     {item}
                   </Link>
@@ -147,7 +148,7 @@ export default function Footer() {
 
           {/* Further Info Column */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-my-blue">
+            <h3 className="font-bold text-lg mb-4 text-primary">
               FURTHER INFO.
             </h3>
             <ul className="space-y-2">
@@ -161,7 +162,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     href="#"
-                    className="hover:text-my-blue transition duration-300"
+                    className="hover:text-primary transition duration-300"
                   >
                     {item}
                   </Link>
