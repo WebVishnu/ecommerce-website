@@ -1,6 +1,5 @@
 import { Product } from '@/types';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter for navigation
 import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';

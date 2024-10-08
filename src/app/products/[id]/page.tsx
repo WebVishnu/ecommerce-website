@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { FiHeart, FiTruck, FiX } from 'react-icons/fi';
 import ProductCard from '@/components/ProductCard';
 import ProductDataJson from '@/json/ProductData';

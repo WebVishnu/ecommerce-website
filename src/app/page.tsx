@@ -7,7 +7,6 @@ import VideoPlayer from "@/components/screens/Video";
 import CategorySlider from "@/components/Category";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar/Navbar";
 
 export default function Page() {
   return (
