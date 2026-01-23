@@ -64,7 +64,7 @@ const router = useRouter();
       </div>
 
       {/* Product Name */}
-      <h3 onClick={handleProductClick} className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer hover:font-bold font-medium transition-colors duration-300 hover:text-primary text-center break-words">
+      <h3 className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer hover:font-bold font-medium transition-colors duration-300 hover:text-primary text-center break-words">
         {name}
       </h3>
 
@@ -85,7 +85,7 @@ const router = useRouter();
         {/* Pass product data as query parameters, including the first image */}
         <Link
           href={{
-            pathname: "/checkout",
+            pathname: "/",
             query: {
               name,
               originalPrice: originalPrice.toString(),
